@@ -1,0 +1,3 @@
+http://127.0.0.1:8000/api/register?name=Yusuf Can Sert&email=yusufcansert123@gmail.com&password=1234&password_confirmation=1234&phone=05338723383
+http://127.0.0.1:8000/api/login?email=yusufcansert123@gmail.com&password=1234
+http://127.0.0.1:8000/api/user/update?name=Yusuf Can Sert&email=yusufcansert123@gmail.com&password=1234&password_confirmation=1234&phone=05338723383

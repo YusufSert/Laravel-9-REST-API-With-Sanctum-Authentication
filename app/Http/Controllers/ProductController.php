@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use PhpParser\Node\Stmt\Return_;
 
+
 class ProductController extends Controller
 {
     /**
@@ -82,4 +83,8 @@ class ProductController extends Controller
     {
        return Product::where('name', 'like', '%'.$name.'%')->get();
     }
+
+    // public function dashboard() {
+    //     return '<h1>ywertweg</h1>';
+    // }
 }
