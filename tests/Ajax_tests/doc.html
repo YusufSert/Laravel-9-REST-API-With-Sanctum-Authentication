@@ -126,22 +126,32 @@
     </div>
 
     <hr />
-    <!-- <h2>satellites/[id]</h2>
+    <h2>Login</h2>
     <div class="row">
         <div class="span9">
             <p>
-                Returns position, velocity, and other related information about
-                a satellite for a given point in time. [id] is required and
-                should be the NORAD catalog id. For the ISS, that id is 25544.
+                The Login API is used authenticate a user with email and password parameters.And ıt wıll return user object and Bearer Token to use prodected routes
             </p>
             <strong>Example Resource URL</strong>
-            <p class="muted">https://api.wheretheiss.at/v1/satellites/25544</p>
+            <p class="muted">http://127.0.0.1:8000/api/login?email=yusufcansert123@gmail.com&password=1234</p>
             <strong>Example Response</strong>
             <pre>
-{
-
-}</pre
-            >
+        [  
+        {
+            "user": {
+                "id": 1,
+                "name": "Yusuf Can Sert",
+                "email": "yusufcansert123@gmail.com",
+                "phone": "05338723383",
+                "profile_photo_path": null,
+                "created_at": "2022-05-08T23:38:53.000000Z",
+                "updated_at": "2022-05-08T23:38:53.000000Z"
+            },
+            "token": "10|4SPcl1yHlIytdxtLeRC979m2fmQ17mhhtEaaO7JE"
+        }
+        ]
+              
+            </pre>
 
             <strong>Parameters</strong>
             <table class="table table-border table-striped">
@@ -150,25 +160,21 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Required</th>
-                        <th>Default</th>
+              
                     </tr>
 
                     <tr>
-                        <td>units</td>
-                        <td>Whether to use miles or kilometers</td>
-                        <td>no</td>
-                        <td>kilometers</td>
+                        <td>email</td>
+                        <td>Uniqe user email</td>
+                        <td>yes</td>
                     </tr>
-                    <tr></tr>
-                    <tr>
-                        <td>timestamp</td>
-                        <td>
-                            Optionally specify a timestamp for orbital position
-                        </td>
-                        <td>no</td>
-                        <td>current timestamp</td>
+                      <tr>
+                        <td>password</td>
+                        <td>User password</td>
+                        <td>yes</td>
                     </tr>
-                    <tr></tr>
+                   
+                   
                 </tbody>
             </table>
         </div>
@@ -194,53 +200,31 @@
     </div>
 
     <hr />
-    <h2>satellites/[id]/positions</h2>
+    <h2>Update</h2>
     <div class="row">
         <div class="span9">
             <p>
-                Returns a list in which each entry contains position, velocity,
-                and other related information about a satellite for a comma
-                delimited list of timestamps (up to 10). [id] is required and
-                should be the NORAD catalog id. For the ISS, that id is 25544.
+                This api in prodected routes which means you can not use it with out Bearer Token.Update apı wıll update the fields in database but you need to be already logged in the system with login api. Login api will create Bearer Token you can use the token in header of the http post request to accees this api
             </p>
             <strong>Example Resource URL</strong>
             <p class="muted">
-                https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892,1436029902&amp;units=miles
+                http://127.0.0.1:8000/api/user/update?name=Yusuf Can Sert&email=yusufcansert123@gmail.com&password=1234&password_confirmation=1234&phone=05338723383
             </p>
+           
             <strong>Example Response</strong>
             <pre>
-[
-{
-    "name": "iss",
-    "id": 25544,
-    "latitude": -24.872011788413,
-    "longitude": 17.600256937812,
-    "altitude": 253.3204968444,
-    "velocity": 17148.926453151,
-    "visibility": "daylight",
-    "footprint": 2761.5254566356,
-    "timestamp": 1436029892,
-    "daynum": 2457208.2163426,
-    "solar_lat": 22.85465108118,
-    "solar_lon": 283.22043315343,
-    "units": "miles"
-},
-{
-    "name": "iss",
-    "id": 25544,
-    "latitude": -25.346134802867,
-    "longitude": 18.047422455202,
-    "altitude": 253.44244641825,
-    "velocity": 17148.616662804,
-    "visibility": "daylight",
-    "footprint": 2762.1565371697,
-    "timestamp": 1436029902,
-    "daynum": 2457208.2164583,
-    "solar_lat": 22.854640837166,
-    "solar_lon": 283.17877169756,
-    "units": "miles"
-}
-]
+                [     
+                {
+                    "id": 1,
+                    "name": "Yusuf Can Sert",
+                    "email": "yusufcansert123@gmail.com",
+                    "phone": "05338723383",
+                    "profile_photo_path": null,
+                    "created_at": "2022-05-08T23:38:53.000000Z",
+                    "updated_at": "2022-05-09T07:46:28.000000Z"
+                }
+                ]
+           
 </pre
             >
 
@@ -251,28 +235,37 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Required</th>
-                        <th>Default</th>
                     </tr>
 
                     <tr>
-                        <td>timestamps</td>
-                        <td>
-                            Specify a comma delimited list of timestamps for
-                            orbital positions, limit 10 per request
-                        </td>
+                        <td>name</td>
+                        <td>User-name</td>
                         <td>yes</td>
-                        <td>none</td>
                     </tr>
-                    <tr></tr>
                     <tr>
-                        <td>units</td>
-                        <td>Whether to use miles or kilometers</td>
-                        <td>no</td>
-                        <td>kilometers</td>
+                        <td>email</td>
+                        <td>User-email</td>
+                        <td>yes</td>
                     </tr>
+                    <tr>
+                        <td>phone</td>
+                        <td>User-phone</td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>User-password </td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>password_confirmation</td>
+                        <td>User-password-confirmation => It wıll not be in database, its just for confirmaion </td>
+                        <td>yes</td>
+                    </tr>
+                    
                     <tr></tr>
                 </tbody>
-            </table>
+            </table>s
         </div>
         <div class="span3">
             <p><strong>Resource Information</strong></p>
@@ -293,9 +286,53 @@
                 </tbody>
             </table>
         </div>
-    </div> -->
+    </div> 
 
     <hr />
+
+    <hr />
+    <h2>Logout</h2>
+    <div class="row">
+        <div class="span9">
+            <p>
+                The Logout API is used for logout from system. You need to use Bearer Token for this api
+            </p>
+            <strong>Example Resource URL</strong>
+            <p class="muted">http://127.0.0.1:8000/api/logout</p>
+            <strong>Example Response</strong>
+            <pre>
+        [  
+        {
+            "message": "Logged out",
+        }
+        ]
+              
+            </pre>
+
+            <strong>Parameters</strong> <br>
+            <strong>No</strong>
+        
+        </div>
+        <div class="span3">
+            <p><strong>Resource Information</strong></p>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <td>API Version</td>
+                        <td><span class="label label-info">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>Response Format</td>
+                        <td><strong>json</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Rate Limited?</td>
+                        <td><strong>Yes</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <!-- <h2>satellites/[id]/tles</h2>
     <div class="row">
         <div class="span9">
