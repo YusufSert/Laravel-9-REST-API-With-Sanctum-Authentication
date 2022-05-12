@@ -7,6 +7,7 @@ fetch("http://127.0.0.1:8000/api/register", {
     body: JSON.stringify({
         name: "Kyle2",
         email: "kyle2@gmail.com",
+        phone: "1",
         password: "1234",
         password_confirmation: "1234",
     }),
@@ -34,3 +35,11 @@ fetch("http://127.0.0.1:8000/api/logout", {
 })
     .then((res) => res.json())
     .then((data) => console.log(data));
+
+fetch("http://127.0.0.1:8000/api/login", {
+    method: "POST",
+    body: JSON.stringify({
+        email: "yusufcansert123@gmail.com",
+        password: "1234",
+    }),
+});

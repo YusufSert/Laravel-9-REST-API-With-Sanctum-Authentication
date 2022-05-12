@@ -49,20 +49,20 @@
             <p class="muted">http://127.0.0.1:8000/api/register?name=Yusuf Can Sert&email=yusufcansert123@gmail.com&password=1234&password_confirmation=1234&phone=05338723383</p>
             <strong>Example Response</strong>
             <pre>
-[
-{
-    "user": {
-        "name": "Yusuf",
-        "email": "yusufcansert123@gmail.com",
-        "phone": "05338723383",
-        "updated_at": "2022-05-09T08:36:07.000000Z",
-        "created_at": "2022-05-09T08:36:07.000000Z",
-        "id": 2
-    },
-    "token": "11|zumqKvgJURPH3pMh3BkoLjfJ1axMMOakjEmH1VJP"
-}
-]</pre
-            >
+                [{
+                    "user": {
+                        "name": "Yusuf1",
+                        "email": "yusuf1cansert123@gmail.com",
+                        "phone": "05338723383",
+                        "profile_photo_path": "no_image.jpg",
+                        "updated_at": "2022-05-11T18:11:03.000000Z",
+                        "created_at": "2022-05-11T18:11:03.000000Z",
+                        "id": 3
+                    },
+                    "token": "13|std3XlTAuOHe80vQmAUNZkrdwxv8TEN8IQCYOWWz"
+                }]     
+
+            </pre>
 
             <strong>Parameters</strong>
             <table class="table table-border table-striped">
@@ -135,23 +135,21 @@
             <strong>Example Resource URL</strong>
             <p class="muted">http://127.0.0.1:8000/api/login?email=yusufcansert123@gmail.com&password=1234</p>
             <strong>Example Response</strong>
-            <pre>
-        [  
-        {
-            "user": {
-                "id": 1,
-                "name": "Yusuf Can Sert",
-                "email": "yusufcansert123@gmail.com",
-                "phone": "05338723383",
-                "profile_photo_path": null,
-                "created_at": "2022-05-08T23:38:53.000000Z",
-                "updated_at": "2022-05-08T23:38:53.000000Z"
-            },
-            "token": "10|4SPcl1yHlIytdxtLeRC979m2fmQ17mhhtEaaO7JE"
-        }
-        ]
+        <pre>
+            [{
+                "user": {
+                    "name": "Yusuf1",
+                    "email": "yusuf1cansert123@gmail.com",
+                    "phone": "05338723383",
+                    "profile_photo_path": "no_image.jpg",
+                    "updated_at": "2022-05-11T18:11:03.000000Z",
+                    "created_at": "2022-05-11T18:11:03.000000Z",
+                    "id": 3
+                },
+                "token": "13|std3XlTAuOHe80vQmAUNZkrdwxv8TEN8IQCYOWWz"
+            }]          
               
-            </pre>
+        </pre>
 
             <strong>Parameters</strong>
             <table class="table table-border table-striped">
@@ -262,7 +260,11 @@
                         <td>User-password-confirmation => It wıll not be in database, its just for confirmaion </td>
                         <td>yes</td>
                     </tr>
-                    
+                    <tr>
+                        <td>profile_photo_path</td>
+                        <td>It wıll create new name as todays date and save it as jpg</td>
+                        <td>yes</td>
+                    </tr>
                     <tr></tr>
                 </tbody>
             </table>s

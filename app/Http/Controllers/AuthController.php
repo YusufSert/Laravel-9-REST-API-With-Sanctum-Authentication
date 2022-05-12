@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+
 
 
 class AuthController extends Controller
@@ -24,6 +26,7 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
             'phone' => $fields['phone'],
+            'profile_photo_path' => "no_image.jpg",
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
@@ -63,12 +66,40 @@ class AuthController extends Controller
         
     }
 
+    public function profile() {
+        $id = auth()->user()->id;
+        $user = User::find($id);
+
+        return response($user);
+    }
+
+    public function updatePicture(Request $request) {
+
+        if($request->file('profile_photo_path'))
+         {
+             $file = $request->file('profile_photo_path');
+             unlink(public_path('upload/user_images/'.$data->profile_photo_path));
+             $filename = date('Ymdhi').$file->getClientOriginalName();
+             $file->move(public_path('upload/user_images'), $filename);
+             $data->profile_photo_path = $filename; // $data['profifle_photo_path'] =
+         }
+         
+        $data->save();
+        $file = $request->file('profile_photo_path');
+        $filename = date('Ymdhi').$file->getClientOriginalName();
+        Image::make($file)->resize(400,400)->save('/home/yusufcan/Desktop/'.$filename);
+        //$file->move('/home/yusufcan/Desktop/', $filename);
+
+    }
+   
+
     public function update(Request $request) {
         $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string',
             'password' => 'required|string|confirmed',
             'phone' => 'required|string',
+            //'profile_photo_path' => 'required',
         ]);
 
         $id = auth()->user()->id;
@@ -77,6 +108,13 @@ class AuthController extends Controller
         $data->email = $fields['email'];
         $data->phone = $fields['phone'];
         $data->password = Hash::make($fields['password']);
+
+        if($request->file('profile_photo_path')) {
+            $file = $request->file('profile_photo_path');
+            $filename = date('Ymdhi').'.'.$file->getClientOriginalExtension();
+            Image::make($file)->resize(400,400)->save(public_path($filename));
+            $data->profile_photo_path = $filename;
+        }
         
         $data->save();
 
