@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
 
 /// test
-Route::post('/user/updatepicture', [AuthController::class, 'updatePicture']);
+//Route::post('/user/updatepicture', [AuthController::class, 'updatePicture']);
 
 
 

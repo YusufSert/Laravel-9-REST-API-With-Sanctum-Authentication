@@ -72,27 +72,7 @@ class AuthController extends Controller
 
         return response($user);
     }
-
-    public function updatePicture(Request $request) {
-
-        if($request->file('profile_photo_path'))
-         {
-             $file = $request->file('profile_photo_path');
-             unlink(public_path('upload/user_images/'.$data->profile_photo_path));
-             $filename = date('Ymdhi').$file->getClientOriginalName();
-             $file->move(public_path('upload/user_images'), $filename);
-             $data->profile_photo_path = $filename; // $data['profifle_photo_path'] =
-         }
-         
-        $data->save();
-        $file = $request->file('profile_photo_path');
-        $filename = date('Ymdhi').$file->getClientOriginalName();
-        Image::make($file)->resize(400,400)->save('/home/yusufcan/Desktop/'.$filename);
-        //$file->move('/home/yusufcan/Desktop/', $filename);
-
-    }
    
-
     public function update(Request $request) {
         $fields = $request->validate([
             'name' => 'required|string',
@@ -112,7 +92,7 @@ class AuthController extends Controller
         if($request->file('profile_photo_path')) {
             $file = $request->file('profile_photo_path');
             $filename = date('Ymdhi').'.'.$file->getClientOriginalExtension();
-            Image::make($file)->resize(400,400)->save(public_path($filename));
+            Image::make($file)->resize(400,400)->save(public_path('/upload/user/'.$filename));
             $data->profile_photo_path = $filename;
         }
         
