@@ -34,9 +34,15 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/products', [ProductController::class, 'store']);
     Route::put('/products/{id}', [ProductController::class, 'update']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+    
+    
+    
+    
+    // User Protected Routes
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user/profile', [AuthController::class, 'profile']);
-    Route::post('/user/update', [AuthController::class, 'update']);
+    Route::post('/user/edit', [AuthController::class, 'edit']);
+    Route::post('/user/update', [AuthController::class, 'store']);
    
 });
 

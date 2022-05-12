@@ -72,8 +72,22 @@ class AuthController extends Controller
 
         return response($user);
     }
+
+    public function edit(Request $request) {
+        $id = auth()->user()->id;
+        $user = User::find($id);
+        $token = $request->bearerToken(); // get currernt token
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return response($response, 201);
+
+    }
    
-    public function update(Request $request) {
+    public function store(Request $request) {
         $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string',
@@ -99,13 +113,19 @@ class AuthController extends Controller
         $data->save();
 
     
-        return  response($data);
+        $token = $request->bearerToken(); // get currernt token
+
+        $response = [
+            'user' => $data,
+            'token' => $token
+        ];
+
+        return response($response, 201);
     }
 
     public function logout(Request $request) {
         $id = auth()->user()->id;
-        auth()->user()->tokens()->delete();
-
+        auth()->user()->tokens()->where('tokenable_id', $id)->delete(); // it will delete the specific logged in user 'tokenable_id = user->id'
         return [
             'message' => 'Logged out',
         ];

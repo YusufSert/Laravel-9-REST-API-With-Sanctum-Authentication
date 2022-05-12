@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="book.js"></script>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <form action="">
+            E-mail:
+            <input type="text" id="email" size="20" name="email" /><br /><br />
+            Password <input type="password" id="password" name="password" />
+            <input type="submit" value="Submit" id="btn-submit" />
+        </form>
+
+        <script>
+            const form = {
+                email: document.querySelector("#email"),
+                password: document.querySelector("#password"),
+                submit: document.querySelector("#btn-submit"),
+            };
+            console.log(form);
+
+            form.submit.addEventListener("click", (e) => {
+                e.preventDefault();
+                const login = "http://127.0.0.1:8000/api/login";
+
+                fetch(login, {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json, text/plain, */*",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: form.email.value,
+                        password: form.password.value,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        // code here //
+                        if (data.error) {
+                            alert(
+                                "Error Password or Username"
+                            ); /*displays error message*/
+                        } else {
+                            window.open(
+                                "dashboard.html"
+                            ); /*opens the target page while Id & password matches*/
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            });
+        </script>
+    </body>
+</html>
