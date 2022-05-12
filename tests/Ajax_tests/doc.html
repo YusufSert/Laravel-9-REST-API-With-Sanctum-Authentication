@@ -203,6 +203,7 @@
         <div class="span9">
             <p>
                 This api in prodected routes which means you can not use it with out Bearer Token.Update apı wıll update the fields in database but you need to be already logged in the system with login api. Login api will create Bearer Token you can use the token in header of the http post request to accees this api
+                This api will creat new folder in public files as update/user/ and save the image as todays data as a name of picture
             </p>
             <strong>Example Resource URL</strong>
             <p class="muted">
@@ -217,7 +218,7 @@
                     "name": "Yusuf Can Sert",
                     "email": "yusufcansert123@gmail.com",
                     "phone": "05338723383",
-                    "profile_photo_path": null,
+                    "profile_photo_path": 202205121058.jpg,
                     "created_at": "2022-05-08T23:38:53.000000Z",
                     "updated_at": "2022-05-09T07:46:28.000000Z"
                 }
@@ -262,7 +263,7 @@
                     </tr>
                     <tr>
                         <td>profile_photo_path</td>
-                        <td>It wıll create new name as todays date and save it as jpg</td>
+                        <td>It wıll create new name as todays date and save it  into database</td>
                         <td>yes</td>
                     </tr>
                     <tr></tr>
