@@ -8,8 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class AuthController extends Controller
 {
@@ -39,6 +38,9 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
+    public  function viewLogin() {
+        return view('Backend.login');
+    }
     public function login(Request $request) {
         $fields = $request->validate([
             'email' => 'required|string',
@@ -63,7 +65,7 @@ class AuthController extends Controller
         ];
 
         return response($response, 201);
-        
+        //return view('login', $response);
     }
 
     public function profile() {
@@ -71,7 +73,8 @@ class AuthController extends Controller
         $user = User::find($id);
 
         return response($user);
-    }
+      
+    }   
 
     public function edit(Request $request) {
         $id = auth()->user()->id;
