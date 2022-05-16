@@ -43,3 +43,11 @@ fetch("http://127.0.0.1:8000/api/login", {
         password: "1234",
     }),
 });
+
+fetch("http://127.0.0.1:8000/api/admin/login", {
+    method: "GET",
+    body: JSON.stringify({
+        email: "yusufcansert123@gmail.com",
+        password: "1234",
+    }),
+});

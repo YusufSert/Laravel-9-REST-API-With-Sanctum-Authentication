@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -11,37 +11,15 @@ use Intervention\Image\Facades\Image;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Models\Admin;
 
-class AuthController extends Controller
+class AdminController extends Controller
 {
-    public function register(Request $request) {
-        $fields = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed',
-            'phone' => 'required|string',
-        ]);
 
-        $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'password' => bcrypt($fields['password']),
-            'phone' => $fields['phone'],
-            'profile_photo_path' => "no_image.jpg",
-        ]);
-
-        $token = $user->createToken('myapptoken')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response($response, 201);
-    }
 
     public  function viewLogin() {
         return view('Backend.login');
     }
+
+
     public function login(Request $request) {
         $fields = $request->validate([
             'email' => 'required|string',
@@ -49,7 +27,7 @@ class AuthController extends Controller
         ]);
 
         // Check email
-        $user = User::where('email', $fields['email'])->first();
+        $user = Admin::where('email', $fields['email'])->first();
 
         // Check password
         if(!$user || !Hash::check($fields['password'], $user->password)) {
@@ -69,21 +47,18 @@ class AuthController extends Controller
         
         //return view('login', $response);
     }
-
-    public function profile() {
-        $id = auth()->user()->id;
-        $user = User::find($id);
-
-         $response = [
-            'user' => $user,
+    
+    public function AdminProfile() {
+        $data = Admin::find(1);
+           $response = [
+            'user' => $data,
         ];
-        return response(compact('response'));
-      
-    }   
+        return view('Backend.profile', compact('response'));
+    } 
 
-    public function edit(Request $request) {
-        $id = auth()->user()->id;
-        $user = User::find($id);
+    public function AdminEdit(Request $request) {
+        
+        $user =  $data = Admin::find(1);
         $token = $request->bearerToken(); // get currernt token
 
         $response = [
@@ -138,11 +113,5 @@ class AuthController extends Controller
             'message' => 'Logged out',
         ];
     }
-     public function AdminProfile() {
-        $data = Admin::find(1);
-           $response = [
-            'user' => $data,
-        ];
-        return view('Backend.profile', compact('response'));
-    }
+    
 }

@@ -14,18 +14,35 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-4 col-md-auto">
-                    <form action="http://127.0.0.1:8000/api/admin/login" method="post">
-                        <h1>Login</h1>
+                    <form action="" method="post">
+                        <h1>Register</h1>
                         <hr />
                         <div class="form-group">
+                            <label for="email">Name: </label><br />
+                            <input type="text" name="name" id="" /><br />
+                        </div>
+                        <div class="form-group">
                             <label for="email">Email: </label><br />
-                            <input type="email" name="email"  /><br />
+                            <input type="email" name="email" id="" /><br />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Phone:</label><br />
+                            <input type="password" name="phone" id="" />
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label><br />
-                            <input type="password" name="password"  />
+                            <input type="password" name="password" id="" />
                         </div>
-                        <button type="submit" class="btn btn-outline-primary">
+                        <div class="form-group">
+                            <label for="email">Password-Confirmation</label
+                            ><br />
+                            <input
+                                type="password"
+                                name="password_confirmation"
+                                id=""
+                            /><br />
+                        </div>
+                        <button type="button" class="btn btn-outline-primary">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
@@ -50,14 +67,11 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
-
 </html>
-
 
 <style>
     body {
-        
-        background-image: url("http://127.0.0.1:8000/public/upload/admin_images/1039437.jpg"); 
+        background-image: url("/resources/views/Backend/pictures/1039437.jpg");
         background-position: center;
         background-size: cover;
         display: flex;
