@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,8 +32,8 @@ Route::post('/register', [AuthController::class, 'register']);
 // Admin routes
 Route::post('/admin/login', [AdminController::class, 'login']);
 Route::get('/admin/login', [AdminController::class, 'viewLogin']);
-
-Route::get('/admin/edit', [AuthController::class, 'AdminEdit']);
+Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
+Route::get('/admin/edit', [AdminController::class, 'AdminEdit']);
 
 
 // Protected routes
@@ -50,7 +51,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/user/update', [AuthController::class, 'store']);
 
     // Admin Protected Routes
-    Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
+    //Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
    
 });
 

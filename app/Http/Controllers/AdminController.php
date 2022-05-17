@@ -43,7 +43,7 @@ class AdminController extends Controller
             'token' => $token
         ];
 
-        return view('Backend.dashboard',compact('response'));
+        return view('Backend.dashboard2',compact('response'));
         
         //return view('login', $response);
     }
@@ -53,7 +53,9 @@ class AdminController extends Controller
            $response = [
             'user' => $data,
         ];
-        return view('Backend.profile', compact('response'));
+       // return view('Backend.profile', compact('response'));
+       return $response;
+        
     } 
 
     public function AdminEdit(Request $request) {

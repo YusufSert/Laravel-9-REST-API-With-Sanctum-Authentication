@@ -168,28 +168,7 @@
             </section>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            var adminData;
-            $(function () {
-                function loadData() {
-                    $.getJSON("http://127.0.0.1:8000/api/admin/profile")
-                        .done(function (data) {
-                            adminData = data;
-                            console.log(adminData);
-                        })
-                        .fail(function () {
-                            alert("fail");
-                        });
-                }
-
-                loadData();
-                $("#profile").remove();
-                $("#content")
-                    .load("http://127.0.0.1:8000/html_template/test.html")
-                    .hide()
-                    .fadeIn("slow");
-            });
-        </script>
+       
     </body>
 </html>
 

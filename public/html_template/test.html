@@ -1,0 +1,28 @@
+<div class="row justify-content-md-center" id="profile">
+    <div class="col-8 col-md-auto">
+        <div class="card" style="width: 18rem">
+            <img src="" class="card-img-top" alt="..." />
+            <div class="card-body">
+                <h5 class="card-title">Admin Profile</h5>
+                <p class="card-text">
+                    Whats up!
+                    <strong>{{$response['user']->name}}</strong>
+                </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    Name: {{ $response['user']->name }}
+                </li>
+                <li class="list-group-item">
+                    Email: {{ $response['user']->email }}
+                </li>
+            </ul>
+            <div class="card-body">
+                <a href="http://127.0.0.1:8000/api/admin/edit" class="card-link"
+                    >Edit</a
+                >
+                <!-- <a href="#" class="card-link">Another link</a> -->
+            </div>
+        </div>
+    </div>
+</div>

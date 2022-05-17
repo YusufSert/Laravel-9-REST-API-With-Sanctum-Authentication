@@ -70,17 +70,6 @@ class AuthController extends Controller
         //return view('login', $response);
     }
 
-    public function profile() {
-        $id = auth()->user()->id;
-        $user = User::find($id);
-
-         $response = [
-            'user' => $user,
-        ];
-        return response(compact('response'));
-      
-    }   
-
     public function edit(Request $request) {
         $id = auth()->user()->id;
         $user = User::find($id);
@@ -143,6 +132,7 @@ class AuthController extends Controller
            $response = [
             'user' => $data,
         ];
-        return view('Backend.profile', compact('response'));
-    }
+        //return view('Backend.profile', compact('response'));
+        return $response;
+    }   
 }

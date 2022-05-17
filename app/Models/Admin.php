@@ -26,6 +26,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_photo_path'
     ];
 
     /**
@@ -55,6 +56,6 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $appends = [
-        'profile_photo_url',
+        '',
     ];
 }
