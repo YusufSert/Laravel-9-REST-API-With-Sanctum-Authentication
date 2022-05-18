@@ -39,9 +39,9 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-    public  function viewLogin() {
-        return view('Backend.login');
-    }
+    // public  function viewLogin() {
+    //     return view('Backend.login');
+    // }
     public function login(Request $request) {
         $fields = $request->validate([
             'email' => 'required|string',
@@ -127,12 +127,5 @@ class AuthController extends Controller
             'message' => 'Logged out',
         ];
     }
-     public function AdminProfile() {
-        $data = Admin::find(1);
-           $response = [
-            'user' => $data,
-        ];
-        //return view('Backend.profile', compact('response'));
-        return $response;
-    }   
+     
 }

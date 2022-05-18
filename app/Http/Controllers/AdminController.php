@@ -53,10 +53,9 @@ class AdminController extends Controller
            $response = [
             'user' => $data,
         ];
-       // return view('Backend.profile', compact('response'));
-       return $response;
-        
-    } 
+        //return view('Backend.profile', compact('response'));
+        return $response;
+    }   
 
     public function AdminEdit(Request $request) {
         

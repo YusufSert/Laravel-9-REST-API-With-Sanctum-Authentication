@@ -26,16 +26,21 @@ use App\Models\Admin;
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/products/search/{name}', [ProductController::class, 'search']);
-Route::post('/register', [AuthController::class, 'register']);
+
 
 // Admin routes
 Route::post('/admin/login', [AdminController::class, 'login']);
 Route::get('/admin/login', [AdminController::class, 'viewLogin']);
-Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
+Route::get('/admin/profile', [AdminController::class, 'AdminProfile']);
 Route::get('/admin/edit', [AdminController::class, 'AdminEdit']);
 
 
-
+// User Routes
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login',[AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/user/edit', [AuthController::class, 'edit']);
+Route::post('/user/update', [AuthController::class, 'store']);
 
 
 
@@ -49,9 +54,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     
     
     // User Protected Routes
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/user/edit', [AuthController::class, 'edit']);
-    Route::post('/user/update', [AuthController::class, 'store']);
+    
 
     // Admin Protected Routes
     //Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
