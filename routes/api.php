@@ -5,8 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
-
-
+use App\Models\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +35,10 @@ Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
 Route::get('/admin/edit', [AdminController::class, 'AdminEdit']);
 
 
+
+
+
+
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/products', [ProductController::class, 'store']);
@@ -52,6 +55,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     // Admin Protected Routes
     //Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
+    
    
 });
 

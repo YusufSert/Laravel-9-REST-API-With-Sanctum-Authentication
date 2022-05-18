@@ -164,21 +164,7 @@
               </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
          <script>
-            $("a").on("click", function (e) {
-                e.preventDefault();
-
-                var $content = $('#content');
-                $('#container').remove();
-                var url = this.href;
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    time:2000,
-                    beforeSend: function() {
-                        $content.append
-                    },
-                });
-            });
+            
         </script>  -->
     </body>
 </html>

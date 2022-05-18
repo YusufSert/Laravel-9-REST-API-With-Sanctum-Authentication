@@ -72,40 +72,37 @@ class AdminController extends Controller
 
     }
    
-    public function store(Request $request) {
-        $fields = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string',
-            'password' => 'required|string|confirmed',
-            'phone' => 'required|string',
-            //'profile_photo_path' => 'required',
-        ]);
+    public function AdminStore() {
+        // $fields = $request->validate([
+        //     'name' => 'required|string',
+        //     'email' => 'required|string',
+        // ]);
+        //   $data = Admin::find(1);
+        // $id = auth()->user()->id;
+        // $data = User::find($id);
+       // $data->name = $fields['name'];
+       // $data->email = $fields['email'];
+        // $data->phone = $fields['phone'];
+        // $data->password = Hash::make($fields['password']);
 
-        $id = auth()->user()->id;
-        $data = User::find($id);
-        $data->name = $fields['name'];
-        $data->email = $fields['email'];
-        $data->phone = $fields['phone'];
-        $data->password = Hash::make($fields['password']);
-
-        if($request->file('profile_photo_path')) {
-            $file = $request->file('profile_photo_path');
-            $filename = date('Ymdhi').'.'.$file->getClientOriginalExtension();
-            Image::make($file)->resize(400,400)->save(public_path('/upload/user/'.$filename));
-            $data->profile_photo_path = $filename;
-        }
+        // if($request->file('profile_photo_path')) {
+        //     $file = $request->file('profile_photo_path');
+        //     $filename = date('Ymdhi').'.'.$file->getClientOriginalExtension();
+        //     Image::make($file)->resize(400,400)->save(public_path('/upload/user/'.$filename));
+        //     $data->profile_photo_path = $filename;
+        // }
         
-        $data->save();
+        //$data->save();
 
     
-        $token = $request->bearerToken(); // get currernt token
+        // $token = $request->bearerToken(); // get currernt token
 
-        $response = [
-            'user' => $data,
-            'token' => $token
-        ];
+        // $response = [
+        //     'user' => $data,
+        //     'token' => $token
+        // ];
 
-        //return $response;
+      return view('ss');
     }
 
     public function logout(Request $request) {
@@ -114,6 +111,5 @@ class AdminController extends Controller
         return [
             'message' => 'Logged out',
         ];
-    }
-    
+    }    
 }
