@@ -1,0 +1,532 @@
+<link
+    rel="stylesheet"
+    href="https://media.wheretheiss.at/v/c88c8236/css/bootstrap.min.css|before-responsive.css|bootstrap-responsive.min.css|main.css"
+/>
+<script
+    type="text/javascript"
+    src="https://maps.google.com/maps/api/js?libraries=geometry&key=AIzaSyD4fEsN-5VFXish0bQIyHSIB5wpcPS1U14"
+></script>
+<script
+    type="text/javascript"
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+></script>
+<script
+    type="text/javascript"
+    src="https://media.wheretheiss.at/v/3c09bd9b/js/jquery.livequery.min.js|main.min.js|bootstrap-tooltip.min.js|bootstrap-popover.min.js|bootstrap-alert.min.js|bootstrap-collapse.min.js"
+></script>
+<div class="content" id="content">
+    <div class="container" id="container">
+        <div class="span12">
+            <button type="button" class="btn btn-danger">API</button>
+            <p>jquery test with api it will remove the id="container" element in html and add data to content from api</p>
+    <h2>Overview</h2>
+    
+    <p>
+        Welcome to the Yusuf REST API! Using this service, you can get e-commerce
+        features
+    </p>
+    <h2>Authentication</h2>
+    <p>
+        There is authentication on some of the apı's.Authentication uses <strong>Bearer Token</strong>
+        You need to use  "Authorization": "Bearer {toeken}" in Header of the http request,
+    </p>
+
+    <h2>Responses</h2>
+    <p>Some notes on responses from this API:</p>
+    <ul>
+        <li>
+            All responses default to JSON format
+        </li>
+    </ul>
+    <h2>Support</h2>
+    <p>yusufcansert123@gmail.com 05338723383 You already know my insta and wp</p>
+    <h2>Endpoints</h2>
+
+    <hr />
+    <h2>Register</h2>
+    <div class="row">
+        <div class="span9">
+            <p>
+                This endpoint register user and return user and token, you can use token for protected routes Example=> /api/user/update
+            </p>
+            <strong>Example Resource URL</strong>
+            <p class="muted">http://127.0.0.1:8000/api/register?name=Yusuf Can Sert&email=yusufcansert123@gmail.com&password=1234&password_confirmation=1234&phone=05338723383</p>
+            <strong>Example Response</strong>
+            <pre>
+                [{
+                    "user": {
+                        "name": "Yusuf1",
+                        "email": "yusuf1cansert123@gmail.com",
+                        "phone": "05338723383",
+                        "profile_photo_path": "no_image.jpg",
+                        "updated_at": "2022-05-11T18:11:03.000000Z",
+                        "created_at": "2022-05-11T18:11:03.000000Z",
+                        "id": 3
+                    },
+                    "token": "13|std3XlTAuOHe80vQmAUNZkrdwxv8TEN8IQCYOWWz"
+                }]     
+
+            </pre>
+
+            <strong>Parameters</strong>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Required</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>User-name</td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>User-email</td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>phone</td>
+                        <td>User-phone</td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>User-password </td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>password_confirmation</td>
+                        <td>User-password-confirmation => It wıll not be in database, its just for confirmaion </td>
+                        <td>yes</td>
+                    </tr>
+                    
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="span3">
+            <p><strong>Resource Information</strong></p>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <td>API Version</td>
+                        <td><span class="label label-info">1</span></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td>Response Format</td>
+                        <td><strong>json</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Rate Limited?</td>
+                        <td><strong>Yes</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+    <h2>Login</h2>
+    <div class="row">
+        <div class="span9">
+            <p>
+                The Login API is used authenticate a user with email and password parameters.And ıt wıll return user object and Bearer Token to use prodected routes
+            </p>
+            <strong>Example Resource URL</strong>
+            <p class="muted">http://127.0.0.1:8000/api/login?email=yusufcansert123@gmail.com&password=1234</p>
+            <strong>Example Response</strong>
+        <pre>
+            [{
+                "user": {
+                    "name": "Yusuf1",
+                    "email": "yusuf1cansert123@gmail.com",
+                    "phone": "05338723383",
+                    "profile_photo_path": "no_image.jpg",
+                    "updated_at": "2022-05-11T18:11:03.000000Z",
+                    "created_at": "2022-05-11T18:11:03.000000Z",
+                    "id": 3
+                },
+                "token": "13|std3XlTAuOHe80vQmAUNZkrdwxv8TEN8IQCYOWWz"
+            }]          
+              
+        </pre>
+
+            <strong>Parameters</strong>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Required</th>
+              
+                    </tr>
+
+                    <tr>
+                        <td>email</td>
+                        <td>Uniqe user email</td>
+                        <td>yes</td>
+                    </tr>
+                      <tr>
+                        <td>password</td>
+                        <td>User password</td>
+                        <td>yes</td>
+                    </tr>
+                   
+                   
+                </tbody>
+            </table>
+        </div>
+        <div class="span3">
+            <p><strong>Resource Information</strong></p>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <td>API Version</td>
+                        <td><span class="label label-info">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>Response Format</td>
+                        <td><strong>json</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Rate Limited?</td>
+                        <td><strong>Yes</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+    <h2>Update</h2>
+    <div class="row">
+        <div class="span9">
+            <p>
+                This api in prodected routes which means you can not use it with out Bearer Token.Update apı wıll update the fields in database but you need to be already logged in the system with login api. Login api will create Bearer Token you can use the token in header of the http post request to accees this api
+                This api will creat new folder in public files as update/user/ and save the image as todays data as a name of picture
+            </p>
+            <strong>Example Resource URL</strong>
+            <p class="muted">
+                http://127.0.0.1:8000/api/user/update?name=Yusuf Can Sert&email=yusufcansert123@gmail.com&password=1234&password_confirmation=1234&phone=05338723383
+            </p>
+           
+            <strong>Example Response</strong>
+            <pre>
+                [     
+                {
+                    "id": 1,
+                    "name": "Yusuf Can Sert",
+                    "email": "yusufcansert123@gmail.com",
+                    "phone": "05338723383",
+                    "profile_photo_path": 202205121058.jpg,
+                    "created_at": "2022-05-08T23:38:53.000000Z",
+                    "updated_at": "2022-05-09T07:46:28.000000Z"
+                }
+                ]
+           
+</pre
+            >
+
+            <strong>Parameters</strong>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Required</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>User-name</td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>User-email</td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>phone</td>
+                        <td>User-phone</td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>User-password </td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>password_confirmation</td>
+                        <td>User-password-confirmation => It wıll not be in database, its just for confirmaion </td>
+                        <td>yes</td>
+                    </tr>
+                    <tr>
+                        <td>profile_photo_path</td>
+                        <td>It wıll create new name as todays date and save it  into database</td>
+                        <td>yes</td>
+                    </tr>
+                    <tr></tr>
+                </tbody>
+            </table>s
+        </div>
+        <div class="span3">
+            <p><strong>Resource Information</strong></p>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <td>API Version</td>
+                        <td><span class="label label-info">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>Response Format</td>
+                        <td><strong>json</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Rate Limited?</td>
+                        <td><strong>Yes</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> 
+
+    <hr />
+
+    <hr />
+    <h2>Logout</h2>
+    <div class="row">
+        <div class="span9">
+            <p>
+                The Logout API is used for logout from system. You need to use Bearer Token for this api
+            </p>
+            <strong>Example Resource URL</strong>
+            <p class="muted">http://127.0.0.1:8000/api/logout</p>
+            <strong>Example Response</strong>
+            <pre>
+        [  
+        {
+            "message": "Logged out",
+        }
+        ]
+              
+            </pre>
+
+            <strong>Parameters</strong> <br>
+            <strong>No</strong>
+        
+        </div>
+        <div class="span3">
+            <p><strong>Resource Information</strong></p>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <td>API Version</td>
+                        <td><span class="label label-info">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>Response Format</td>
+                        <td><strong>json</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Rate Limited?</td>
+                        <td><strong>Yes</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+      <h2>Edit</h2>
+    <div class="row">
+        <div class="span9">
+            <p>
+                The Logout API is used for logout from system. You need to use Bearer Token for this api
+            </p>
+            <strong>Example Resource URL</strong>
+            <p class="muted">http://127.0.0.1:8000/api/user/edit</p>
+            <strong>Example Response</strong>
+            <pre>
+        [  
+        {
+            "message": "Logged out",
+        }
+        ]
+              
+            </pre>
+
+            <strong>Parameters</strong> <br>
+            <strong>No</strong>
+        
+        </div>
+        <div class="span3">
+            <p><strong>Resource Information</strong></p>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <td>API Version</td>
+                        <td><span class="label label-info">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>Response Format</td>
+                        <td><strong>json</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Rate Limited?</td>
+                        <td><strong>Yes</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- <h2>satellites/[id]/tles</h2>
+    <div class="row">
+        <div class="span9">
+            <p>
+                Returns the TLE data for a given satellite in either json or
+                text format
+            </p>
+            <strong>Example Resource URL (json)</strong>
+            <p class="muted">
+                https://api.wheretheiss.at/v1/satellites/25544/tles
+            </p>
+            <strong>Example Response</strong>
+            <pre>
+{
+"requested_timestamp": 1364084064,
+"tle_timestamp": 1363892433,
+"id": "25544",
+"name": "iss",
+"header": "ISS (ZARYA)",
+"line1": "1 25544U 98067A   13080.79204657  .00024647  00000-0  40606-3 0  4540",
+"line2": "2 25544  51.6478 182.2316 0011718  59.7125  80.2831 15.52100765821132"
+}</pre
+            >
+            <strong>Example Resource URL (text)</strong>
+            <p class="muted">
+                https://api.wheretheiss.at/v1/satellites/25544/tles?format=text
+            </p>
+
+            <strong>Example Response</strong>
+            <pre>
+ISS (ZARYA)
+1 25544U 98067A   13080.79204657  .00024647  00000-0  40606-3 0  4540
+2 25544  51.6478 182.2316 0011718  59.7125  80.2831 15.52100765821132</pre
+            >
+
+            <strong>Parameters</strong>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Required</th>
+                        <th>Default</th>
+                    </tr>
+
+                    <tr>
+                        <td>format</td>
+                        <td>response format, can be json or text</td>
+                        <td>no</td>
+                        <td>json</td>
+                    </tr>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="span3">
+            <p><strong>Resource Information</strong></p>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <td>API Version</td>
+                        <td><span class="label label-info">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>Response Format</td>
+                        <td><strong>json or text</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Rate Limited?</td>
+                        <td><strong>Yes</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+    <h2>coordinates/[lat,lon]</h2>
+    <div class="row">
+        <div class="span9">
+            <p>
+                Returns position, current time offset, country code, and
+                timezone id for a given set of coordinates in the format of
+                longitude,latitude
+            </p>
+            <strong>Example Resource URL</strong>
+            <p class="muted">
+                https://api.wheretheiss.at/v1/coordinates/37.795517,-122.393693
+            </p>
+            <strong>Example Response</strong>
+            <pre>
+{
+"latitude": "37.795517",
+"longitude": "-122.393693",
+"timezone_id": "America/Los_Angeles",
+"offset": -7,
+"country_code": "US",
+"map_url": "https://maps.google.com/maps?q=37.795517,-122.393693&amp;z=4"
+}</pre
+            >
+
+            <strong>Parameters</strong>
+            <p>None</p>
+        </div>
+        <div class="span3">
+            <p><strong>Resource Information</strong></p>
+            <table class="table table-border table-striped">
+                <tbody>
+                    <tr>
+                        <td>API Version</td>
+                        <td><span class="label label-info">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>Response Format</td>
+                        <td><strong>json</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Rate Limited?</td>
+                        <td><strong>Yes</strong></td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+<script>
+    $('button').on('click', function() {
+        $("#container").remove();
+        $.getJSON("https://api.wheretheiss.at/v1/satellites").done(function (data){
+   $.ajax({
+       type: "GET",
+       url:"https://api.wheretheiss.at/v1/satellites/" + data[0].id,
+       success:function(data) {
+           console.log(data);
+           var s =  JSON.stringify(data)
+            $("#content").html('<h1 id:"h1"  ">' + s + "</h1>");
+           $("h1").css({"background-color": "yellow", "font-size": "200%", "text-align": "center"});
+
+       }
+   });
+ });
+    });
+</script>
+
+>
