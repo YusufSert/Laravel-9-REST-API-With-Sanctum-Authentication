@@ -102,7 +102,7 @@
                                 aria-expanded="false"
                             >
                                 <img
-                                    src="/public/upload/admin_images/1039437.jpg"
+                                    src="http://127.0.0.1:8000/upload/admin_images/1039437.jpg"
                                     alt="mdo"
                                     width="32"
                                     height="32"
@@ -151,8 +151,10 @@
                                 </p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">,</li>
-                                <li class="list-group-item"></li>
+                                <li class="list-group-item">
+                                    <span id="name"></span>
+                                </li>
+                                <li class="list-group-item" id="email"></li>
                             </ul>
                             <div class="card-body">
                                 <a
@@ -160,6 +162,7 @@
                                     class="card-link"
                                     >Edit</a
                                 >
+
                                 <!-- <a href="#" class="card-link">Another link</a> -->
                             </div>
                         </div>
@@ -171,23 +174,27 @@
         <script>
             var adminData;
             $(function () {
-                function loadData() {
-                    $.getJSON("http://127.0.0.1:8000/api/admin/profile")
-                        .done(function (data) {
-                            adminData = data;
-                            console.log(adminData);
-                        })
-                        .fail(function () {
-                            alert("fail");
-                        });
-                }
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:8000/html_template/test.html",
+                    success: function (data) {
+                        $("#content").html(data);
+                    },
+                });
+            });
+            $(function () {
+                $.getJSON("http://127.0.0.1:8000/api/admin/profile").done(
+                    function (data) {
+                        console.log(data);
 
-                loadData();
-                $("#profile").remove();
-                $("#content")
-                    .load("http://127.0.0.1:8000/html_template/test.html")
-                    .hide()
-                    .fadeIn("slow");
+                        $("#content img").attr(
+                            "src",
+                            data.user.profile_photo_path
+                        );
+                        $("#content li").eq(0).text(data.user.name);
+                        $("#content li").eq(1).text(data.user.email);
+                    }
+                );
             });
         </script>
     </body>

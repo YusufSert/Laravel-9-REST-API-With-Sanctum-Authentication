@@ -43,7 +43,7 @@ class AdminController extends Controller
             'token' => $token
         ];
 
-        return view('Backend.dashboard2',compact('response'));
+        return view('Backend.dashboard',compact('response'));
         
         //return view('login', $response);
     }
