@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Models\Admin;
 
 /*
@@ -33,6 +34,7 @@ Route::post('/admin/login', [AdminController::class, 'login']);
 Route::get('/admin/login', [AdminController::class, 'viewLogin']);
 Route::get('/admin/profile', [AdminController::class, 'AdminProfile']);
 Route::get('/admin/edit', [AdminController::class, 'AdminEdit']);
+Route::post('/admin/store', [AdminController::class, 'AdminStore']);
 
 
 // User Routes
@@ -42,6 +44,11 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/user/edit', [AuthController::class, 'edit']);
 Route::post('/user/update', [AuthController::class, 'store']);
 
+
+// Categoty Controller
+
+Route::post('/category/add', [CategoryController::class, 'addCategory']);
+Route::get('category/view', [CategoryController::class, 'viewCategory']);
 
 
 // Protected routes

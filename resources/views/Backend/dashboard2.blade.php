@@ -102,7 +102,7 @@
                                 aria-expanded="false"
                             >
                                 <img
-                                    src="http://127.0.0.1:8000/upload/admin_images/1039437.jpg"
+                                    src="{{$response['user']->profile_photo_path}}"
                                     alt="mdo"
                                     width="32"
                                     height="32"
@@ -124,7 +124,7 @@
                                 <li><hr class="dropdown-divider" /></li>
                                 <li>
                                     <a class="dropdown-item" href="#"
-                                        >Sign out</a
+                                        >Name:  {{ $response['user']->name }}Sign out</a
                                     >
                                 </li>
                                 <li><hr class="dropdown-divider" /></li>
@@ -141,59 +141,8 @@
             <section class="content" id="content"></section>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            var profile = (url) => {
-                var adminData;
-                $(function () {
-                    $.ajax({
-                        type: "GET",
-                        url: "http://127.0.0.1:8000/html_template/admin_profile.html",
-                        success: function (data) {
-                            $("#content").html(data);
-                        },
-                    });
-                });
-                $(function () {
-                    $.getJSON(url).done(function (data) {
-                        $("#content img").attr(
-                            "src",
-                            data.user.profile_photo_path
-                        );
-                        $("#content li").eq(0).text(data.user.name);
-                        $("#content li").eq(1).text(data.user.email);
-                    });
-                });
-            };
-            //profile();
-            $(".dropdown-item").on("click", function (e) {
-                e.preventDefault();
-                var url = this.href;
-                if (this.text == "Profile") {
-                    profile(url);
-                }
-            });
-            var edit = () => {
-                $(function () {
-                    $.ajax({
-                        type: "GET",
-                        url: "http://127.0.0.1:8000/html_template/admin_edit.html",
-                        timeout: 2000,
-                        beforeSend: function () {},
-                        complete: function () {},
-                        success: function (data) {
-                            $("#content").html(data);
-                        },
-                    });
-                    $.getJSON("http://127.0.0.1:8000/api/admin/edit").done(
-                        function (data) {
-                            $("#content img").attr(
-                                "src",
-                                data.user.profile_photo_path
-                            );
-                        }
-                    );
-                });
-            };
+        <script src="http://127.0.0.1:8000/js/app.js">
+   
         </script>
     </body>
 </html>

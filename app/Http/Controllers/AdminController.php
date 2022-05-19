@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Models\Admin;
+use Laravel\Sail\Console\PublishCommand;
 
 class AdminController extends Controller
 {
@@ -43,7 +44,7 @@ class AdminController extends Controller
             'token' => $token
         ];
 
-        return view('Backend.dashboard',compact('response'));
+        return view('Backend.dashboard2',compact('response'));
         
         //return view('login', $response);
     }
@@ -71,37 +72,20 @@ class AdminController extends Controller
 
     }
    
-    public function AdminStore() {
-        // $fields = $request->validate([
-        //     'name' => 'required|string',
-        //     'email' => 'required|string',
-        // ]);
-        //   $data = Admin::find(1);
-        // $id = auth()->user()->id;
-        // $data = User::find($id);
-       // $data->name = $fields['name'];
-       // $data->email = $fields['email'];
-        // $data->phone = $fields['phone'];
-        // $data->password = Hash::make($fields['password']);
-
-        // if($request->file('profile_photo_path')) {
-        //     $file = $request->file('profile_photo_path');
-        //     $filename = date('Ymdhi').'.'.$file->getClientOriginalExtension();
-        //     Image::make($file)->resize(400,400)->save(public_path('/upload/user/'.$filename));
-        //     $data->profile_photo_path = $filename;
-        // }
+    public function AdminStore(Request $request) {
         
-        //$data->save();
 
     
-        // $token = $request->bearerToken(); // get currernt token
+         $token = $request->bearerToken(); // get currernt token
 
-        // $response = [
-        //     'user' => $data,
-        //     'token' => $token
-        // ];
+        //   $response = [
+        //       'user' => $data,
+        //       'token' => $token
+        //  ];
 
-      return view('ss');
+      //return view("Backend.dashboard2", compact('response'));
+      return "ff";
+  
     }
 
     public function logout(Request $request) {
