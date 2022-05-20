@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Models\Admin;
+use Illuminate\Cookie\CookieValuePrefix;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -29,7 +31,7 @@ class AuthController extends Controller
             'profile_photo_path' => "no_image.jpg",
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('JWT')->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -58,16 +60,21 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('JWT')->plainTextToken;
+
+        $cookie = cookie('JWT', $token, 60); // 60min cookie
 
         $response = [
             'user' => $user,
-            'token' => $token
+            'token' => $token // keep token for now if cookie not work
         ];
 
-        return view('Backend.dashboard',compact('response'));
+        //return view('Backend.dashboard',compact('response'));
         
         //return view('login', $response);
+
+        return response($response)->withCookie($cookie);
+        //return response($response);
     }
 
     public function edit(Request $request) {
@@ -121,6 +128,7 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request) {
+        $cookie = Cookie::forget('JWT');
         $id = auth()->user()->id;
         auth()->user()->tokens()->where('tokenable_id', $id)->delete(); // it will delete the specific logged in user 'tokenable_id = user->id'
         return [

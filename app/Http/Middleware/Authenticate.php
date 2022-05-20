@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -15,7 +16,20 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('viewLogin');
+            return route('login');
         }
+    }
+    
+    //frontend not need to store token with this
+    public function handle($request, Closure $next, ...$guards)
+    {
+        if($jwt = $request->cookie( 'JWT'))
+        {
+            $request->headers->set('Authorization', 'Bearer '. $jwt); // İn every request set Authorizatiom header: with cookie esy
+        }
+
+        $this->authenticate($request, $guards);
+
+        return $next($request);
     }
 }

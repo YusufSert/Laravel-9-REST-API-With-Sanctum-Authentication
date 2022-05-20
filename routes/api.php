@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
 use App\Models\Admin;
+use App\Models\SubCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,19 +39,22 @@ Route::get('/admin/edit', [AdminController::class, 'AdminEdit']);
 Route::post('/admin/store', [AdminController::class, 'AdminStore']);
 
 
-// User Routes
+// Public User Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
-Route::post('/user/edit', [AuthController::class, 'edit']);
-Route::post('/user/update', [AuthController::class, 'store']);
 
 
-// Categoty Controller
+
+// Category Controller
 
 Route::post('/category/add', [CategoryController::class, 'addCategory']);
-Route::get('category/view', [CategoryController::class, 'viewCategory']);
+Route::get('/category/view', [CategoryController::class, 'viewCategory']);
 
+
+
+
+// SubCategort Controller
+Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory']);
 
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
@@ -60,8 +65,12 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     
     
     
-    // User Protected Routes
     
+    // User Protected Routes
+    Route::post('/user/edit', [AuthController::class, 'edit']);
+    Route::post('/user/update', [AuthController::class, 'store']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
 
     // Admin Protected Routes
     //Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
