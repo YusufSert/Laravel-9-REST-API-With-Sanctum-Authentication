@@ -101,7 +101,7 @@ class ProductController extends Controller
      */
     public function search($name)
     {
-       return Product::where('name', 'like', '%'.$name.'%')->get();
+       return Product::where('name', 'like', '%'.$name.'%')->get(); //Searche the elemen bt name// put like '%'naem'%' start with or end with
     }
 }
 
