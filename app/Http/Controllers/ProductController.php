@@ -18,10 +18,9 @@ class ProductController extends Controller
     public function index()
     {
         $data = Product::all();
-        $url = url('/');
         $reponse = [
+            'status' => '200-OKİdir',
             'data' => $data,
-            'url' => $url,
         ];
         return response($reponse);
     }
