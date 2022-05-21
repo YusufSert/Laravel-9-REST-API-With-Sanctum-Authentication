@@ -74,18 +74,6 @@ class AdminController extends Controller
    
     public function AdminStore(Request $request) {
         
-
-    
-         $token = $request->bearerToken(); // get currernt token
-
-        //   $response = [
-        //       'user' => $data,
-        //       'token' => $token
-        //  ];
-
-      //return view("Backend.dashboard2", compact('response'));
-      return "ff";
-  
     }
 
     public function logout(Request $request) {

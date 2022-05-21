@@ -127,13 +127,13 @@ class AuthController extends Controller
         //return $response;
     }
 
-    public function logout(Request $request) {
+    public function logout() {
         $cookie = Cookie::forget('JWT');
         $id = auth()->user()->id;
         auth()->user()->tokens()->where('tokenable_id', $id)->delete(); // it will delete the specific logged in user 'tokenable_id = user->id'
-        return [
-            'message' => 'Logged out',
-        ];
+        return response([
+            'message' => 'Byzzzzz',
+        ])->withCookie($cookie);
     }
      
 }

@@ -27,7 +27,7 @@ use App\Models\SubCategory;
 // Public  Routes
 
 Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{id}', [ProductController::class, 'show']);
+//Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/products/search/{name}', [ProductController::class, 'search']);
 
 
@@ -45,20 +45,25 @@ Route::post('/login',[AuthController::class, 'login']);
 
 
 
-// Category Controller
 
+// Category Routes
 Route::post('/category/add', [CategoryController::class, 'addCategory']);
 Route::get('/category/view', [CategoryController::class, 'viewCategory']);
 
 
 
 
-// SubCategort Controller
+// SubCategort Routes
 Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory']);
+
+
+//Product Routes
+Route::post('/products/add', [ProductController::class, 'store']);
+
 
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
-    Route::post('/products', [ProductController::class, 'store']);
+    
     Route::put('/products/{id}', [ProductController::class, 'update']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
     
@@ -69,7 +74,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // User Protected Routes
     Route::post('/user/edit', [AuthController::class, 'edit']);
     Route::post('/user/update', [AuthController::class, 'store']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/logout', [AuthController::class, 'logout']);
 
 
     // Admin Protected Routes

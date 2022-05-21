@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use PhpParser\Node\Stmt\Return_;
+use Intervention\Image\Facades\Image;
 
 
 class ProductController extends Controller
@@ -16,7 +17,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        $data = Product::all();
+        $url = url('/');
+        $reponse = [
+            'data' => $data,
+            'url' => $url,
+        ];
+        return response($reponse);
     }
 
     /**
@@ -29,12 +36,26 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required',
             'description' => 'required',
             'price' => 'required',
         ]);
-        return Product::create($request->all());
 
+        $image = $request->file('image_url');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(400,400)->save('upload/product_images/'.$name_gen);
+        $product =  Product::create([
+            'name' => $request->name,
+            'slug' => strtolower(str_replace(' ', '-',$request->name)),
+            'description' => $request->description,
+            'price' => $request->price,
+            'image_url' => url('/upload/product_images').'/'.$name_gen, // Esy
+        ]);
+
+         return response([
+             'status' => '200 OKİ',
+             'data' => $product,
+         ]);
+       
 
     }
 
@@ -83,8 +104,5 @@ class ProductController extends Controller
     {
        return Product::where('name', 'like', '%'.$name.'%')->get();
     }
-
-    // public function dashboard() {
-    //     return '<h1>ywertweg</h1>';
-    // }
 }
+
