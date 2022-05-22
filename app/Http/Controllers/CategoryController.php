@@ -49,9 +49,25 @@ class CategoryController extends Controller
         'category_slug_tr' => strtolower(str_replace(' ','-',$request->category_name_tr)),
         'category_icon' => $request->category_icon,
         ]);
-        return response(200);
-
+        return response('╾━╤デ╦︻', 200);
 }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'category_name_en' => 'required',
+            'category_name_tr' => 'required',
+            'category_icon' => 'required',
+        ]);
+
+        Category::findOrFail($id)->update([
+        'category_name_en' => $request->category_name_en,
+        'category_name_tr' => $request->category_name_tr,
+        'category_slug_en' => strtolower(str_replace(' ','-',$request->category_name_en)),
+        'category_slug_tr' => strtolower(str_replace(' ','-',$request->category_name_tr)),
+        'category_icon' => $request->category_icon,
+        ]);
+
+    }
 
     public function search($id) {
         $data = SubCategory::where('caregory_id', '=', $id)->get();
