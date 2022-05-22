@@ -47,17 +47,17 @@ Route::post('/login',[AuthController::class, 'login']);
 
 
 // Category Routes
-Route::post('/category/add', [CategoryController::class, 'addCategory']);
-Route::get('/category/view', [CategoryController::class, 'viewCategory']);
-Route::get('/category', [CategoryController::class, 'index']);
-Route::get('/category/{id}', [CategoryController::class, 'show']);
-
+Route::post('/category/add', [CategoryController::class, 'addCategory']); // add categories
+Route::get('/category', [CategoryController::class, 'index']); // get all categories
+Route::get('/category/{id}', [CategoryController::class, 'show']); // GET specific  category
+Route::get('/category/get/{id}', [CategoryContoller::class, 'search']); // get all subcategories belongs to requested category_id
 
 
 // SubCategort Routes
-Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory']);
-Route::get('/subcategory/get/{id}', [SubCategoryController::class, 'show']);
-
+Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory']); // add categories
+Route::get('/subcategory/get/{id}', [SubCategoryController::class, 'search']); // get all products belongs to requesed sub_category_id
+Route::get('/subcategory', [SubCategoryController::class, 'index']);
+Route::get('/subcategory/{id}', [SubCategoryController::class, 'show']);
 
 //Product Routes
 Route::post('/products/add', [ProductController::class, 'store']);

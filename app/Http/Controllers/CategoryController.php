@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\SubCategory;
 use GuzzleHttp\Psr7\Response;
 
 class CategoryController extends Controller
@@ -52,13 +53,11 @@ class CategoryController extends Controller
 
 }
 
-    public function viewCategory() {
-        $category = Category::latest()->get();
-         $response = [
-            'status' => '200 OK',
-            'data' => $category
-         ];
-        return response($response);
+    public function search($id) {
+        $data = SubCategory::where('caregory_id', '=', $id)->get();
+        return response([
+        'data' => $data,
+    ]);
     }
 
 }
