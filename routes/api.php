@@ -49,12 +49,14 @@ Route::post('/login',[AuthController::class, 'login']);
 // Category Routes
 Route::post('/category/add', [CategoryController::class, 'addCategory']);
 Route::get('/category/view', [CategoryController::class, 'viewCategory']);
-
+Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category/{id}', [CategoryController::class, 'show']);
 
 
 
 // SubCategort Routes
 Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory']);
+Route::get('/subcategory/get/{id}', [SubCategoryController::class, 'show']);
 
 
 //Product Routes

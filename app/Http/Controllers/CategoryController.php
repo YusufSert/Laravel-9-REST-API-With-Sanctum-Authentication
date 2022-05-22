@@ -9,7 +9,27 @@ use GuzzleHttp\Psr7\Response;
 
 class CategoryController extends Controller
 {
-    //
+    //List all Categories
+    public function index() {
+        $data = Category::all();
+        $reponse = [
+            'status' => '200-OKİdir',
+            'data' => $data,
+        ];
+        return response($reponse);
+    }
+
+    public function show($id) {
+        $data = Category::find($id);
+        if($data == null){return response(['status'=>'success', 'data' => '404 Not Found :(']);}
+        return response([
+            'status' => '200-OKS:)',
+            'data' => $data,
+        ]);
+
+    }
+
+    // Add category
     public function addCategory(Request $request) {
         $request->validate([
             'category_name_en' => 'required',

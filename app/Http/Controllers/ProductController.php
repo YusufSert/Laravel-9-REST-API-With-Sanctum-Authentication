@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $data = Product::all();
         $reponse = [
-            'status' => '200-OKİdir',
+            'status' => '🟢 200-OKİdir',
             'data' => $data,
         ];
         return response($reponse);
@@ -37,6 +37,7 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'sub_category_id' => 'required|exists:App\Models\SubCategory,id',
         ]);
 
         $image = $request->file('image_url');
@@ -48,10 +49,11 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'image_url' => url('/upload/product_images').'/'.$name_gen, // Esy
+            'sub_category_id' => $request->sub_category_id,
         ]);
 
          return response([
-             'status' => '200 OKİ',
+             'status' => '200  OKİ',
              'data' => $product,
          ]);
        
@@ -66,7 +68,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::find($id);
+        $data =  Product::find($id);
+        if($data == null){return response(['status'=>'success', 'data' => '404 Not Found :(']);}
+        return response([
+            'status' => '🟢 200-OKS:)',
+            'data' => $data,
+        ]);
     }
 
     /**
