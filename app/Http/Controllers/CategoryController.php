@@ -67,6 +67,10 @@ class CategoryController extends Controller
         'category_icon' => $request->category_icon,
         ]);
 
+        return response([
+            'status' => '204 No Content ╾━╤デ╦︻'
+        ]);
+
     }
 
     public function search($id) {
