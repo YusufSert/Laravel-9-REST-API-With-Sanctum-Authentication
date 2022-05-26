@@ -51,14 +51,14 @@ Route::post('/category/add', [CategoryController::class, 'addCategory']); // add
 Route::get('/category', [CategoryController::class, 'index']); // get all categories
 Route::get('/category/{id}', [CategoryController::class, 'show']); // GET specific  category
 Route::get('/category/get/{id}', [CategoryContoller::class, 'search']); // get all subcategories belongs to requested category_id
-Route::put('/category/update/{id}', [CategoryController::class, 'update']);//╾━╤デ╦︻
+Route::put('/category/update/{id}', [CategoryController::class, 'update']);//╾━╤デ╦︻ Updated the git category with requested id
 
 // SubCategort Routes
 Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory']); // add categories
 Route::get('/subcategory/get/{id}', [SubCategoryController::class, 'search']); // get all products belongs to requesed sub_category_id
 Route::get('/subcategory', [SubCategoryController::class, 'index']); // get all the list of subcagory
-Route::get('/subcategory/{id}', [SubCategoryController::class, 'show']); // show the subcategory whic will get update
-Route::get('subcategory/update/{id}', [SubCategory::class, 'update']); // Updated the subcategory with requested id
+Route::get('/subcategory/{id}', [SubCategoryController::class, 'show']);// GET specific  category
+Route::put('/subcategory/update/{id}', [SubCategory::class, 'update']); // Updated the subcategory with requested id
 
 //Product Routes
 Route::post('/products/add', [ProductController::class, 'store']);
@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/user/edit', [AuthController::class, 'edit']);
     Route::post('/user/update', [AuthController::class, 'store']);
     Route::get('/logout', [AuthController::class, 'logout']);
-
+    Route::post('/user/address', [AuthController::class, 'address']);
 
     // Admin Protected Routes
     //Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
@@ -99,7 +99,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-//  🐱 🐭 🐹 🐰 🦊 🐻 🐼 🐻‍❄️ 🐨 🐯 🦁 🐮 🐷 🐽
+//    🐹 🐰 🦊 🐻 🐼 🐻‍❄️ 🐨 🐯 🦁 🐮 🐷 🐽
 // 🐸 🐵 🙈 🙉 🙊 🐒 🐔 🐧 🐦 🐤 🐣 🐥 🦆 🦅 🦉
 // 🦇 🐺 🐗 🐴 🦄 🐝 🪱 🐛 🦋 🐌 🐞 🐜 🪰 🪲 🪳 
 // 🦟 🦗 🕷 🕸 🦂 🐢 🐍 🦎 🦖 🦕 🐙 🦑 🦐 🦞 🦀 🐡
