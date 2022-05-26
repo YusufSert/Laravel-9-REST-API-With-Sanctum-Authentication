@@ -68,7 +68,7 @@ class CategoryController extends Controller
         ]);
 
         return response([
-            'status' => '204 No Content 🐶'
+            'status' => '201 Created 🐶'
         ]);
 
     }

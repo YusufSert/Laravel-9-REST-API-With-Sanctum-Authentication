@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Models\Admin;
+use App\Models\Adress;
 use Illuminate\Cookie\CookieValuePrefix;
 use Illuminate\Support\Facades\Cookie;
 
@@ -134,6 +135,27 @@ class AuthController extends Controller
         return response([
             'message' => 'Byzzzzz',
         ])->withCookie($cookie);
+    }
+
+    public function address(Request $request)
+    {
+        $request->validate([
+            'adress' => 'required',
+            'adress2' => 'required',
+            'district' => 'required',
+            'postalcode' => 'required',
+        ]);
+
+        Adress::create([
+            'adress' => $request->address,
+            'adress2' => $request->adress2,
+            'district' => $request->district,
+            'postal_code' => $request->postal_code,
+        ]);
+
+        return response([
+            'status' => '201 Created 🐸',
+        ]);
     }
      
 }
