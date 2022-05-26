@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->constrained('categories')->nullable();
             $table->string('sub_category_name_en');
             $table->string('sub_category_name_tr');
             $table->string('sub_category_slug_en');

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('password');
             $table->string('profile_photo_path')->nullable();
+            $table->foreignId('address_id')->nullable()->constrained('addresses');
             $table->rememberToken();
             $table->timestamps();
         });

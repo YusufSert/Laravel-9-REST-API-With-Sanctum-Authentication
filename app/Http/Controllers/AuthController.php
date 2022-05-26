@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Models\Admin;
-use App\Models\Adress;
+use App\Models\Address;
 use Illuminate\Cookie\CookieValuePrefix;
 use Illuminate\Support\Facades\Cookie;
 
@@ -143,18 +143,25 @@ class AuthController extends Controller
             'adress' => 'required',
             'adress2' => 'required',
             'district' => 'required',
-            'postalcode' => 'required',
+            'postal_code' => 'required',
         ]);
 
-        Adress::create([
-            'adress' => $request->address,
+        $adress = Address::create([
+            'adress' => $request->adress,
             'adress2' => $request->adress2,
             'district' => $request->district,
             'postal_code' => $request->postal_code,
         ]);
+       
 
-        return response([
+        User::findOrFail(auth()->user()->id)->update([
+            'address_id' => $adress->id,
+        ]);
+
+         return response([
             'status' => '201 Created 🐸',
+            'data' => $adress,
+
         ]);
     }
      
