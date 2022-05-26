@@ -164,5 +164,15 @@ class AuthController extends Controller
 
         ]);
     }
+
+    public function viewAddress() {
+        $adressId = auth()->user()->address_id;
+        $data = Address::findOrFail($adressId);
+        return response([
+            'status' => '200 OK 🐺',
+            'data' => $data,
+            'id' => $adressId,
+        ]);
+    }
      
 }

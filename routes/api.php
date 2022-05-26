@@ -79,7 +79,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/user/update', [AuthController::class, 'store']);
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/user/address', [AuthController::class, 'address']);
-    Route::get('/user/address', [AuthController::class, 'viewAdress']);
+    Route::get('/user/address', [AuthController::class, 'viewAddress']); // get address of logined User, you dont need to give id of user
 
     // Admin Protected Routes
     //Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
@@ -101,7 +101,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // 🐸 🐵 🙈 🙉 🙊 🐒 🐔 🐧 🐦 🐤 🐣 🐥 🦆 🦅 🦉
-// 🦇 🐺 🐗 🐴 🦄 🐝 🪱 🐛 🦋 🐌 🐞 🐜 🪰 🪲 🪳 
+// 🦇  🐗 🐴 🦄 🐝 🪱 🐛 🦋 🐌 🐞 🐜 🪰 🪲 🪳 
 // 🦟 🦗 🕷 🕸 🦂 🐢 🐍 🦎 🦖 🦕 🐙 🦑 🦐 🦞 🦀 🐡
 // 🐠 🐟 🐬 🐳 🐋 🦈 🐊 🐅 🐆 🦓 🦍 🦧 🦣 🐘 🦛🦔
 // 🦏 🐪 🐫 🦒 🦘 🦬 🐃 🐂 🐄 🐎 🐖 🐏 🐑 🦙 🐐 🦌 
