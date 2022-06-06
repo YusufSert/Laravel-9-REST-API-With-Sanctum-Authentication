@@ -80,7 +80,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/user/address', [AuthController::class, 'address']);
     Route::get('/user/address', [AuthController::class, 'viewAddress']); // get address of logined User, you dont need to give id of user
-
+    Route::post('/user/address/update', [AuthController::class, 'updateAddress']);
     // Admin Protected Routes
     //Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
     
