@@ -57,19 +57,29 @@ class CategoryController extends Controller
         return response('╾━╤デ╦︻', 200);
 }
 
-    public function update(Request $request, $id) {
-        $request->validate([
+         public function update(Request $request, $id) {
+         $request->validate([
+            'image_url' => 'required',
             'category_name_en' => 'required',
             'category_name_tr' => 'required',
             'category_icon' => 'required',
+            [
+                'category_name_en.required' => 'Input Category English',
+                'category_name_tr.required' => 'Yazmayı Unuttun, ?'
+            ]
         ]);
+    
 
+        $image = $request->file('image_url');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(400,400)->save('upload/category_image/'.$name_gen);
         Category::findOrFail($id)->update([
         'category_name_en' => $request->category_name_en,
         'category_name_tr' => $request->category_name_tr,
         'category_slug_en' => strtolower(str_replace(' ','-',$request->category_name_en)),
         'category_slug_tr' => strtolower(str_replace(' ','-',$request->category_name_tr)),
         'category_icon' => $request->category_icon,
+        'image_url' =>  url('/upload/category_image').'/'.$name_gen,
         ]);
 
         return response([
@@ -79,7 +89,7 @@ class CategoryController extends Controller
     }
 
     public function search($id) {
-        $data = SubCategory::where('caregory_id', '=', $id)->get();
+        $data = SubCategory::where('category_id', '=', $id)->get();
         return response([
         'data' => $data,
     ]);

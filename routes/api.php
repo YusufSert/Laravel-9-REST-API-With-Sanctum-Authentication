@@ -50,14 +50,14 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::post('/category/add', [CategoryController::class, 'addCategory']); // add categories
 Route::get('/category', [CategoryController::class, 'index']); // get all categories
 Route::get('/category/{id}', [CategoryController::class, 'show']); // GET specific  category
-Route::get('/category/get/{id}', [CategoryContoller::class, 'search']); // get all subcategories belongs to requested category_id
-Route::put('/category/update/{id}', [CategoryController::class, 'update']);//╾━╤デ╦︻ Updated the git category with requested id
+Route::get('/category/get/{id}', [CategoryController::class, 'search']); // get all subcategories  belongs to requested category_id
+Route::put('/category/update/{id}', [CategoryController::class, 'update']);//╾━╤デ╦︻ Updated the  category with requested id
 
 // SubCategort Routes
 Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory']); // add categories
 Route::get('/subcategory/get/{id}', [SubCategoryController::class, 'search']); // get all products belongs to requesed sub_category_id
 Route::get('/subcategory', [SubCategoryController::class, 'index']); // get all the list of subcagory
-Route::get('/subcategory/{id}', [SubCategoryController::class, 'show']);// GET specific  category
+Route::get('/subcategory/{id}', [SubCategoryController::class, 'show']);// GET specific  subcategory
 Route::put('/subcategory/update/{id}', [SubCategory::class, 'update']); // Updated the subcategory with requested id
 
 //Product Routes
@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     
     
     // User Protected Routes
-    Route::post('/user/profile', [AuthController::class, 'edit']);
+    Route::get('/user/profile', [AuthController::class, 'edit']);
     Route::post('/user/update', [AuthController::class, 'store']);
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/user/address', [AuthController::class, 'address']);
