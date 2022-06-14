@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     
     
     // User Protected Routes
-    Route::post('/user/edit', [AuthController::class, 'edit']);
+    Route::post('/user/profile', [AuthController::class, 'edit']);
     Route::post('/user/update', [AuthController::class, 'store']);
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/user/address', [AuthController::class, 'address']);

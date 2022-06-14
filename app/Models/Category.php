@@ -12,7 +12,8 @@ class Category extends Model
         'category_name_en',
         'category_name_tr',
         'category_icon',
-        'sub_category_slug_en',
-        'sub_category_slug_tr',
+        'category_slug_en',
+        'category_slug_tr',
+        'image_url'
     ];
 }

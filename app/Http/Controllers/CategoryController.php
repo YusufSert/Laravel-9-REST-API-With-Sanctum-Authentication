@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
 use GuzzleHttp\Psr7\Response;
+use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
@@ -38,16 +39,20 @@ class CategoryController extends Controller
             'category_icon' => 'required',
             [
                 'category_name_en.required' => 'Input Category English',
-                'category_name_tr.required' => 'Yazmayı Unuttun, Malmın ?'
+                'category_name_tr.required' => 'Yazmayı Unuttun, ?'
             ]
         ]);
     
-        Category::insert([
+        $image = $request->file('image_url');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(400,400)->save('upload/category_image/'.$name_gen);
+        Category::create([
         'category_name_en' => $request->category_name_en,
         'category_name_tr' => $request->category_name_tr,
         'category_slug_en' => strtolower(str_replace(' ','-',$request->category_name_en)),
         'category_slug_tr' => strtolower(str_replace(' ','-',$request->category_name_tr)),
         'category_icon' => $request->category_icon,
+        'image_url' =>  url('/upload/category_image').'/'.$name_gen, // Esy
         ]);
         return response('╾━╤デ╦︻', 200);
 }

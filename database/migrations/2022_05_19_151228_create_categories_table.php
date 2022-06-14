@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('category_slug_en');
             $table->string('category_slug_tr');
             $table->string('category_icon');
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }
