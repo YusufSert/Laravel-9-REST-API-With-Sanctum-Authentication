@@ -38,11 +38,12 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required',
             'sub_category_id' => 'required|exists:App\Models\SubCategory,id',
+            'image_url' => 'required',
         ]);
 
         $image = $request->file('image_url');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(400,400)->save('upload/product_images/'.$name_gen);
+        Image::make($image)->resize(600,500)->save('upload/product_images/'.$name_gen);
         $product =  Product::create([
             'name' => $request->name,
             'slug' => strtolower(str_replace(' ', '-',$request->name)),
@@ -110,5 +111,7 @@ class ProductController extends Controller
     {
        return Product::where('name', 'like', '%'.$name.'%')->get(); //Searche the elemen bt name// put like '%'naem'%' start with or end with
     }
+
+    
 }
 

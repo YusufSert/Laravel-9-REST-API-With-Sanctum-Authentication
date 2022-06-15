@@ -5,10 +5,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\Admin;
 use App\Models\SubCategory;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +29,7 @@ use App\Models\SubCategory;
 
 // Public  Routes
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{id}', [ProductController::class, 'show']);
-Route::get('/products/search/{name}', [ProductController::class, 'search']);
+
 
 
 // Admin routes
@@ -62,7 +63,12 @@ Route::put('/subcategory/update/{id}', [SubCategory::class, 'update']); // Updat
 
 //Product Routes
 Route::post('/products/add', [ProductController::class, 'store']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::get('/products/search/{name}', [ProductController::class, 'search']);
 
+//Cart Routes
+Route::post('/cart/data/store/{id}', [CartController::class, "store"]);
 
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
