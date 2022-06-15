@@ -18,9 +18,10 @@ class CartController extends Controller
         // ]);
 
         $product = Product::findOrFail($id);
-        
+        $user_id = auth()->user()->id;
             Cart::create([
                 "id" => $id,
+                "user_id" => $user_id,
                 "name" => $product->name,
                 'image_url' => $product->image_url,
                 'price' => $product->price,
@@ -30,5 +31,11 @@ class CartController extends Controller
             $data = Cart::all();
         
             return response($data);
+    }
+
+    function show()
+    {
+        $data = Cart::where('user_id', '=', auth()->user()->id)->get();
+        return response($data);
     }
 }

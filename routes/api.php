@@ -68,7 +68,8 @@ Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/products/search/{name}', [ProductController::class, 'search']);
 
 //Cart Routes
-Route::post('/cart/data/store/{id}', [CartController::class, "store"]);
+
+
 
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
@@ -90,6 +91,9 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // Admin Protected Routes
     //Route::get('/admin/profile', [AuthController::class, 'AdminProfile']);
     
+    // Cart Protected Routes
+    Route::get('/cart/data', [CartController::class, "show"]);
+    Route::post('/cart/data/store/{id}', [CartController::class, "store"]);
    
 });
 
