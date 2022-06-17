@@ -62,8 +62,11 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('JWT')->plainTextToken;
+        $cookie = cookie('JWT', $token, 60);
 
-        $cookie = cookie('JWT', $token, 60); // 60min cookie
+
+
+        //$cookie = cookie('JWT', $token, 60); // 60min cookie
 
         $response = [
             'user' => $user,
@@ -74,7 +77,7 @@ class AuthController extends Controller
         
         //return view('login', $response);
 
-        return response($response)->withCookie($cookie);
+        return response($response)->cookie($cookie);
         //return response($response);
     }
 

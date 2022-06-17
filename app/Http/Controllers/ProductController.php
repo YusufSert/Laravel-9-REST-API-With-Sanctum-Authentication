@@ -86,9 +86,33 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id) // put method is op
     {
-        $product = Product::find($id);
-        $product->update($request->all());
-        return $product;
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'sub_category_id' => 'required|exists:App\Models\SubCategory,id',
+            'image_url' => 'required',
+        ]);
+
+        $image = $request->file('image_url');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(600,500)->save('upload/product_images/'.$name_gen);
+        Product::findOrFail($id)->update([
+            'name' => $request->name,
+            'slug' => strtolower(str_replace(' ', '-',$request->name)),
+            'description' => $request->description,
+            'price' => $request->price,
+            'image_url' => url('/upload/product_images').'/'.$name_gen, // Esy
+            'sub_category_id' => $request->sub_category_id,
+        ]);
+
+        // $product = Product::find($id);
+        // $product->update($request->all());
+        //return $product;
+
+         return response([
+            'status' => '201 Created 🐸'
+        ]);
     }
 
     /**
