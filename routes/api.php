@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\Admin;
+use App\Models\Category;
 use App\Models\SubCategory;
 
 
@@ -53,6 +54,8 @@ Route::get('/category', [CategoryController::class, 'index']); // get all catego
 Route::get('/category/{id}', [CategoryController::class, 'show']); // GET specific  category
 Route::get('/category/get/{id}', [CategoryController::class, 'search']); // get all subcategories  belongs to requested category_id
 Route::put('/category/update/{id}', [CategoryController::class, 'update']);//╾━╤デ╦︻ Updated the  category with requested id
+Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+
 
 // SubCategort Routes
 Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory']); // add categories
