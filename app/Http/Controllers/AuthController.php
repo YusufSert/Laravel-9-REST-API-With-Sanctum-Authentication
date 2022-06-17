@@ -174,5 +174,19 @@ class AuthController extends Controller
             'id' => $adressId,
         ]);
     }
+     public function passwordUpdate(Request $request){
+        $validateData = $request->validate([
+            'oldpassword' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $hashedPassword = auth()->user()->password;
+        if(Hash::check($request->oldpassword, $hashedPassword))
+        {
+            $user = User::find(auth()->user()->id);
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+    }
      
 }
