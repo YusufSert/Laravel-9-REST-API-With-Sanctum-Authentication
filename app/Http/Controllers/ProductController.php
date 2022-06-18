@@ -145,6 +145,16 @@ class ProductController extends Controller
             'status' => '201 Created 🐸'
         ]);
     }
+
+      public function removePopular($id)
+    {
+        Product::findOrFail($id)->update([
+            'popular' => '0',
+        ]);
+        return response([
+            'status' => '201 Created 🐸'
+        ]);
+    }
     
 
 }
