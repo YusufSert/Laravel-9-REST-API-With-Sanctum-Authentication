@@ -136,6 +136,16 @@ class ProductController extends Controller
        return Product::where('name', 'like', '%'.$name.'%')->get(); //Searche the elemen bt name// put like '%'naem'%' start with or end with
     }
 
+    public function addPopular($id)
+    {
+        Product::findOrFail($id)->update([
+            'popular' => '1',
+        ]);
+        return response([
+            'status' => '201 Created 🐸'
+        ]);
+    }
     
+
 }
 

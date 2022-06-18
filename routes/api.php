@@ -67,6 +67,7 @@ Route::put('/subcategory/update/{id}', [SubCategory::class, 'update']); // Updat
 //Product Routes
 Route::post('/products/add', [ProductController::class, 'store']);
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/popular/add/{id}', [ProductController::class, 'addPopular']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/products/search/{name}', [ProductController::class, 'search']);
 
