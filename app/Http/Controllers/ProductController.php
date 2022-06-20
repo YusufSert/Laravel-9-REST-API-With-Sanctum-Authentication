@@ -155,6 +155,15 @@ class ProductController extends Controller
             'status' => '201 Created 🐸'
         ]);
     }
+
+    public function showPopular ()
+    {
+        $data = Product::where('popular', '=', '1')->get();
+        return response([
+            'status' => '200 ok',
+            'data' => $data,
+        ]);
+    }
     
 
 }

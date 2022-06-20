@@ -31,7 +31,7 @@ use App\Models\SubCategory;
 // Public  Routes
 
 
-
+//eef
 
 // Admin routes
 Route::post('/admin/login', [AdminController::class, 'login']);
@@ -71,6 +71,7 @@ Route::get('/products/popular/add/{id}', [ProductController::class, 'addPopular'
 Route::get('/products/popular/remove/{id}', [ProductController::class, 'removePopular']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/products/search/{name}', [ProductController::class, 'search']);
+Route::get('/popular', [ProductController::class, 'showPopular']);
 
 //Cart Routes
 
