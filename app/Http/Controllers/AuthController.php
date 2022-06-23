@@ -62,11 +62,12 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('JWT')->plainTextToken;
-        $cookie = cookie('JWT', $token, 60);
+        //$cookie = cookie()->queue("loginToken", $token, 60*24*365*10, null, null, null, true, false, 'None');
+        //$cookie = cookie('JWT', $token, 60);
 
 
 
-        //$cookie = cookie('JWT', $token, 60); // 60min cookie
+        $cookie = cookie('JWT', $token, 60,null, null, null, true, false, 'None'); // 60min cookie
 
         $response = [
             'user' => $user,

@@ -102,7 +102,11 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // Cart Protected Routes
     Route::get('/cart/data', [CartController::class, "show"]);
     Route::post('/cart/data/store/{id}', [CartController::class, "store"]);
-   
+    Route::get('/cart/data/remove/{id}', [CartController::class, "remove"]);
+
+    // Order route;
+    Route::post('/user/order/store', [OrderController::class, 'store']);
+    Route::get('/user/order/show', [OrderController::class, 'show']);
 });
 
 

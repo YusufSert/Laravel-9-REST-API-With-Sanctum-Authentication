@@ -38,4 +38,15 @@ class CartController extends Controller
         $data = Cart::where('user_id', '=', auth()->user()->id)->get();
         return response($data);
     }
+
+    function remove($id)
+    {
+        Cart::where([
+            'user_id' => auth()->user()->id,
+            'id' => $id,
+        ])->delete();
+      
+        return 'ok';
+    }
+
 }
