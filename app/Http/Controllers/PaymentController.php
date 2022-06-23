@@ -23,10 +23,8 @@ class PaymentController extends Controller
             'credit_cart_number' => $request->credit_cart_number,
             'cvc' => $request->cvc
         ]);
-
          return response([
              'status' => '200',
-             'data' => $data
          ]);
         //return $data['user_id'];
     }

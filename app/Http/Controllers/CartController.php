@@ -42,7 +42,16 @@ class CartController extends Controller
     function show()
     {
         $data = Cart::where('user_id', '=', auth()->user()->id)->get();
-        return response($data);
+        if(Count($data) < 1)
+        {
+            return response([
+                'status' => '404'
+            ]);
+        }
+        return response([
+            'status' => '200',
+            'data' => $data,
+        ]);
     }
 
     function remove($id)
@@ -51,14 +60,13 @@ class CartController extends Controller
             'user_id' => auth()->user()->id,
             'id' => $id,
         ]);
-        // if(count((array)$data)){return response([
-        //     'status' => '404',
-        // ]);}
+        // if($data ==){return response([
+        //      'status' => '404',
+        //  ]);}
     
         $data->delete();
         return response([
             'status' => '200',
-            'data' => $data,
         ]);
     }
 

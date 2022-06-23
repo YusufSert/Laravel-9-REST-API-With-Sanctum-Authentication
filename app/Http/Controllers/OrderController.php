@@ -29,7 +29,7 @@ class OrderController extends Controller
         ]);
           return response([
         'status' => '200',
-        'data' => $order,
+        //'data' => $order,
 
         ]);
 
@@ -41,7 +41,8 @@ class OrderController extends Controller
      
         $id = auth()->user()->id;
         $orders = Order::where('user_id', '=', $id)->get();
-        $data = [];
+        if(count($orders) < 1){return response(['status' => '404']);}
+        //$data = [];
         // for($i = 0; $i > count($order); $i++)
         // {
                
@@ -53,7 +54,6 @@ class OrderController extends Controller
            
         // }
         $a = [];
-        $b = [];
         $data = [];
         $i = 0;
        foreach($orders as $order)
@@ -70,7 +70,10 @@ class OrderController extends Controller
          $data[$i] =  $temp;
          $i++;
        }
-        return response($data);
+        return response([
+          'status' => '200',
+          'data' => $data,
+        ]);
      }   
 
 }

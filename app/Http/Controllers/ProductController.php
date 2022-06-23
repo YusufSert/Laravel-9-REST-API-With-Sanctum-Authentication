@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $data = Product::all();
-        if($data == null){return response(['status' => '404']);}
+        if(count($data) < 1){return response(['status' => '404']);}
         $reponse = [
             'status' => '200',
             'data' => $data,
