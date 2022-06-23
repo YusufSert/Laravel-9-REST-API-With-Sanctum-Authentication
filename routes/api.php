@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\Admin;
 use App\Models\Category;
@@ -35,10 +36,10 @@ use App\Models\SubCategory;
 
 // Admin routes
 Route::post('/admin/login', [AdminController::class, 'login']);
-Route::get('/admin/login', [AdminController::class, 'viewLogin']);
+//Route::get('/admin/login', [AdminController::class, 'viewLogin']);
 Route::get('/admin/profile', [AdminController::class, 'AdminProfile']);
-Route::get('/admin/edit', [AdminController::class, 'AdminEdit']);
-Route::post('/admin/store', [AdminController::class, 'AdminStore']);
+//Route::get('/admin/edit', [AdminController::class, 'AdminEdit']);
+Route::post('/admin/update', [AdminController::class, 'AdminStore']);
 
 
 // Public User Routes
@@ -52,7 +53,7 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::post('/category/add', [CategoryController::class, 'addCategory']); // add categories
 Route::get('/category', [CategoryController::class, 'index']); // get all categories
 Route::get('/category/{id}', [CategoryController::class, 'show']); // GET specific  category
-Route::get('/category/get/{id}', [CategoryController::class, 'search']); // get all subcategories  belongs to requested category_id
+Route::get('/category/sub/{id}', [CategoryController::class, 'search']); // get all subcategories  belongs to requested category_id
 Route::put('/category/update/{id}', [CategoryController::class, 'update']);//╾━╤デ╦︻ Updated the  category with requested id
 Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
 
@@ -62,17 +63,18 @@ Route::post('/subcategory/add',[SubCategoryController::class, 'addSubCategory'])
 Route::get('/subcategory/get/{id}', [SubCategoryController::class, 'search']); // get all products belongs to requesed sub_category_id
 Route::get('/subcategory', [SubCategoryController::class, 'index']); // get all the list of subcagory
 Route::get('/subcategory/{id}', [SubCategoryController::class, 'show']);// GET specific  subcategory
-Route::put('/subcategory/update/{id}', [SubCategory::class, 'update']); // Updated the subcategory with requested id
-
+Route::put('/subcategory/update/{id}', [SubCategoryController::class, 'update']); // Updated the subcategory with requested id
+Route::delete('/subcategory/{id}', [SubCategoryController::class, 'destroy']);
 //Product Routes
-Route::post('/products/add', [ProductController::class, 'store']);
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/popular/add/{id}', [ProductController::class, 'addPopular']);
-Route::get('/products/popular/remove/{id}', [ProductController::class, 'removePopular']);
-Route::get('/products/{id}', [ProductController::class, 'show']);
-Route::get('/products/search/{name}', [ProductController::class, 'search']);
-Route::get('/popular', [ProductController::class, 'showPopular']);
-
+Route::post('/products/add', [ProductController::class, 'store']);//
+Route::get('/products', [ProductController::class, 'index']);//
+Route::get('/products/popular/add/{id}', [ProductController::class, 'addPopular']);//
+Route::get('/products/popular/remove/{id}', [ProductController::class, 'removePopular']);//
+Route::get('/products/{id}', [ProductController::class, 'show']);//
+Route::get('/products/search/{name}', [ProductController::class, 'search']);//
+Route::get('/popular', [ProductController::class, 'showPopular']);//
+Route::put('/products/update/{id}', [ProductController::class, 'update']);//
+Route::delete('/products/{id}', [ProductController::class, 'destroy']);//
 //Cart Routes
 
 
@@ -80,8 +82,7 @@ Route::get('/popular', [ProductController::class, 'showPopular']);
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
     
-    Route::put('/products/update/{id}', [ProductController::class, 'update']);
-    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+   
     
     
     
@@ -107,6 +108,9 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // Order route;
     Route::post('/user/order/store', [OrderController::class, 'store']);
     Route::get('/user/order/show', [OrderController::class, 'show']);
+
+    // Payment route
+    Route::post('/user/payment',  [PaymentController::class, 'store']);
 });
 
 

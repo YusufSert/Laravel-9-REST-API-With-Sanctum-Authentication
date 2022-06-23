@@ -12,5 +12,6 @@ class Order extends Model
         'user_id',
         'cart',
         'payment_id',
+        'total_price'
     ];
 }

@@ -30,6 +30,7 @@ return array(
     'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Order' => $baseDir . '/app/Models/Order.php',
+    'App\\Models\\Payment' => $baseDir . '/app/Models/Payment.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\SubCategory' => $baseDir . '/app/Models/SubCategory.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

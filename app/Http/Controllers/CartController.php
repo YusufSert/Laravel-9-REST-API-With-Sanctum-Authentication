@@ -16,11 +16,15 @@ class CartController extends Controller
         //     'price' => 'required',
         //     'qty' => 'required'
         // ]);
-
-        $product = Product::findOrFail($id);
+        $request->validate([
+            'qty' => 'required',
+        ]);
+        $product = Product::find($id);
+        if($product == null){return response(['status' => '404']);}
+        
         $user_id = auth()->user()->id;
-            Cart::create([
-                "id" => $id,
+        $data = Cart::create([
+                "id" => $product->id,
                 "user_id" => $user_id,
                 "name" => $product->name,
                 'image_url' => $product->image_url,
@@ -28,9 +32,11 @@ class CartController extends Controller
                 'qty' => $request->qty,
             ]);
 
-            $data = Cart::all();
-        
-            return response($data);
+            //$data = Cart::all();
+            
+            return response([
+                'status' => '200'
+            ]);
     }
 
     function show()
@@ -41,12 +47,19 @@ class CartController extends Controller
 
     function remove($id)
     {
-        Cart::where([
+        $data = Cart::where([
             'user_id' => auth()->user()->id,
             'id' => $id,
-        ])->delete();
-      
-        return 'ok';
+        ]);
+        // if(count((array)$data)){return response([
+        //     'status' => '404',
+        // ]);}
+    
+        $data->delete();
+        return response([
+            'status' => '200',
+            'data' => $data,
+        ]);
     }
 
 }

@@ -18,28 +18,32 @@ class AuthController extends Controller
 {
     public function register(Request $request) {
         $fields = $request->validate([
-            'name' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
             'phone' => 'required|string',
         ]);
 
         $user = User::create([
-            'name' => $fields['name'],
+            'first_name' => $fields['first_name'],
+            'last_name' => $fields['last_name'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
             'phone' => $fields['phone'],
             'profile_photo_path' => "no_image.jpg",
         ]);
 
-        $token = $user->createToken('JWT')->plainTextToken;
+        //$token = $user->createToken('JWT')->plainTextToken;
 
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
+        // $response = [
+        //     'user' => $user,
+        //     'token' => $token
+        // ];
 
-        return response($response, 201);
+        return response([
+            'status' => '200'
+        ]);
     }
 
     // public  function viewLogin() {
@@ -70,7 +74,6 @@ class AuthController extends Controller
         $cookie = cookie('JWT', $token, 60,null, null, null, true, false, 'None'); // 60min cookie
 
         $response = [
-            'user' => $user,
             'token' => $token // keep token for now if cookie not work
         ];
 
@@ -98,25 +101,27 @@ class AuthController extends Controller
    
     public function store(Request $request) {
         $fields = $request->validate([
-            'name' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string',
-            'password' => 'required|string|confirmed',
+            //'password' => 'required|string|confirmed',
             'phone' => 'required|string',
             //'profile_photo_path' => 'required',
         ]);
 
         $id = auth()->user()->id;
         $data = User::find($id);
-        $data->name = $fields['name'];
+        $data->first_name = $fields['first_name'];
+        $data->last_name = $fields['last_name'];
         $data->email = $fields['email'];
         $data->phone = $fields['phone'];
-        $data->password = Hash::make($fields['password']);
 
+        //$data->password = Hash::make($fields['password']);
         if($request->file('profile_photo_path')) {
             $file = $request->file('profile_photo_path');
             $filename = date('Ymdhi').'.'.$file->getClientOriginalExtension();
             Image::make($file)->resize(400,400)->save(public_path('/upload/user/'.$filename));
-            $data->profile_photo_path = $filename;
+            $data->profile_photo_path = url('/upload/user').'/'.$filename;
         }
         
         $data->save();
@@ -124,12 +129,14 @@ class AuthController extends Controller
     
         $token = $request->bearerToken(); // get currernt token
 
-        $response = [
-            'user' => $data,
-            'token' => $token
-        ];
+        // $response = [
+        //     'user' => $data,
+        //     'token' => $token
+        // ];
 
-        //return $response;
+        return response([
+            'status' => '201'
+        ]);
     }
 
     public function logout() {
@@ -137,8 +144,8 @@ class AuthController extends Controller
         $id = auth()->user()->id;
         auth()->user()->tokens()->where('tokenable_id', $id)->delete(); // it will delete the specific logged in user 'tokenable_id = user->id'
         return response([
-            'message' => 'Byzzzzz',
-        ])->withCookie($cookie);
+            'status' => '200'
+        ]);
     }
 
     public function address(Request $request)
@@ -163,9 +170,7 @@ class AuthController extends Controller
         ]);
 
          return response([
-            'status' => '201 Created 🐸',
-            'data' => $adress,
-
+            'status' => '200',
         ]);
     }
 
@@ -173,9 +178,8 @@ class AuthController extends Controller
         $adressId = auth()->user()->address_id;
         $data = Address::findOrFail($adressId);
         return response([
-            'status' => '200 OK 🐺',
+            'status' => '200 OK',
             'data' => $data,
-            'id' => $adressId,
         ]);
     }
      public function passwordUpdate(Request $request){
@@ -191,6 +195,32 @@ class AuthController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
         }
+          return response([
+            'status' => '201'
+        ]);
     }
-     
+
+     public function updateAddress(Request $request) {
+
+         $request->validate([
+            'adress' => 'required',
+            'adress2' => 'required',
+            'district' => 'required',
+            'postal_code' => 'required',
+        ]);
+
+        $adressId = auth()->user()->address_id;
+        Address::findOrFail($adressId)->update([
+            'adress' => $request->adress,
+            'adress2' => $request->adress2,
+            'district' => $request->district,
+            'postal_code' => $request->postal_code,
+        ]);
+        
+        return response([
+            'status' => '201'
+        ]);
+     }
 }
+
+

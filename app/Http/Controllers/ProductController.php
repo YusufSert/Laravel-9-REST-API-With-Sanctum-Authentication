@@ -18,8 +18,9 @@ class ProductController extends Controller
     public function index()
     {
         $data = Product::all();
+        if($data == null){return response(['status' => '404']);}
         $reponse = [
-            'status' => '🟢 200-OKİdir',
+            'status' => '200',
             'data' => $data,
         ];
         return response($reponse);
@@ -54,8 +55,7 @@ class ProductController extends Controller
         ]);
 
          return response([
-             'status' => '200  OKİ',
-             'data' => $product,
+             'status' => '200',
          ]);
        
 
@@ -70,9 +70,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $data =  Product::find($id);
-        if($data == null){return response(['status'=>'success', 'data' => '404 Not Found :(']);}
+        if($data == null){return response(['status'=>'404']);}
         return response([
-            'status' => '🟢 200-OKS:)',
+            'status' => '200',
             'data' => $data,
         ]);
     }
@@ -111,7 +111,7 @@ class ProductController extends Controller
         //return $product;
 
          return response([
-            'status' => '201 Created 🐸'
+            'status' => '200'
         ]);
     }
 
@@ -123,7 +123,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-       return Product::destroy($id);
+       $data =  Product::find($id);
+       if($data == null){return response(['status'=>'404']);}
+       Product::destroy($id);
+       return response([
+           'status' => '200'
+       ]);
     }
 
      /**
@@ -133,32 +138,66 @@ class ProductController extends Controller
      */
     public function search($name)
     {
-       return Product::where('name', 'like', '%'.$name.'%')->get(); //Searche the elemen bt name// put like '%'naem'%' start with or end with
+       $data =  Product::where('name', 'like', '%'.$name.'%')->get(); //Searche the elemen bt name// put like '%'naem'%' start with or end with
+       if(count($data) < 1){return response(['status' => '404']);}
+       return response([
+           'status' => '200',
+           'data' => $data
+       ]);
     }
 
     public function addPopular($id)
     {
-        Product::findOrFail($id)->update([
-            'popular' => '1',
+        $data = Product::find($id);
+        if($data == null)
+        {
+            return response([
+                'status' => '404'
+            ]);
+        }else
+        $data->update([
+            'popular' => '1'
         ]);
+        // Product::findOrFail($id)->update([
+        //     'popular' => '1',
+        // ]);
         return response([
-            'status' => '201 Created 🐸'
+            'status' => '200'
         ]);
     }
 
       public function removePopular($id)
     {
-        Product::findOrFail($id)->update([
-            'popular' => '0',
+        // $data = Product::find($id);
+        // Product::findOrFail($id)->update([
+        //     'popular' => '0',
+        // ]);
+        // return response([
+        //     'status' => '201 Created 🐸'
+        // ]);
+
+        $data = Product::find($id);
+        if($data == null)
+        {
+            return response([
+                'status' => '404'
+            ]);
+        }else
+        $data->update([
+            'popular' => '0'
         ]);
+        // Product::findOrFail($id)->update([
+        //     'popular' => '1',
+        // ]);
         return response([
-            'status' => '201 Created 🐸'
+            'status' => '200'
         ]);
     }
 
     public function showPopular ()
     {
         $data = Product::where('popular', '=', '1')->get();
+        if(count($data) < 1){ return response(['status' => '404']);}
         return response([
             'status' => '200 ok',
             'data' => $data,

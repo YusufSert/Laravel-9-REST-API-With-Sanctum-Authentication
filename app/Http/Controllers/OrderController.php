@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Payment;
 
 class OrderController extends Controller
 {
@@ -13,12 +14,18 @@ class OrderController extends Controller
     public function store(Request $request)
 
     {
+      $request->validate([
+        'total_price' => 'required'
+      ]);
         $id = auth()->user()->id;
         $cart = serialize(Cart::where('user_id', '=', $id)->get());
+        $payment = Payment::where('user_id', '=', $id)->get();
+        $pId = $payment[0]['id'];
         $order = Order::create([
             'user_id' => $id,
-            'payment_id' => '1234',
+            'payment_id' => $pId,
             'cart' => $cart,
+            'total_price' => $request->total_price
         ]);
           return response([
         'status' => '200',

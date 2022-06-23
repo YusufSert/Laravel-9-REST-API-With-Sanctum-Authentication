@@ -15,17 +15,23 @@ class CategoryController extends Controller
     public function index() {
         $data = Category::all();
         $reponse = [
-            'status' => '200-OKİdir',
+            'status' => '200',
             'data' => $data,
         ];
+        if($data == null)
+        {
+            return response([
+                'status' => '404'
+            ], 404);
+        }
         return response($reponse);
     }
 
     public function show($id) {
         $data = Category::find($id);
-        if($data == null){return response(['status'=>'success', 'data' => '404 Not Found :(']);}
+        if($data == null){return response(['status'=>'404']);}
         return response([
-            'status' => '200-OKS:)',
+            'status' => '200',
             'data' => $data,
         ]);
 
@@ -54,10 +60,12 @@ class CategoryController extends Controller
         'category_icon' => $request->category_icon,
         'image_url' =>  url('/upload/category_image').'/'.$name_gen, // Esy
         ]);
-        return response('╾━╤デ╦︻', 200);
+        return response([
+            'status' => '200'
+        ]);
 }
 
-         public function update(Request $request, $id) {
+         public function store(Request $request, $id) {
          $request->validate([
             'image_url' => 'required',
             'category_name_en' => 'required',
@@ -83,20 +91,35 @@ class CategoryController extends Controller
         ]);
 
         return response([
-            'status' => '201 Created 🐶'
+            'status' => '201'
         ]);
 
     }
 
     public function search($id) {
         $data = SubCategory::where('category_id', '=', $id)->get();
+        if(count($data) < 1){return response(['status'=>'404']);}
+        else {
         return response([
+        'status' => '200',
         'data' => $data,
     ]);
+}
     }
 
     public function destroy($id)
     {
-       return Category::destroy($id);
+       if( Category::destroy($id))
+        {
+            return response([
+                'status' => '200'
+            ]);
+        }
+        else{
+            return response([
+                'status' => '404'
+            ]);
+        }
+      
     }
 }

@@ -11,8 +11,14 @@ class SubCategoryController extends Controller
     //
     public function index() {
         $data = SubCategory::all();
+        if($data == null)
+        {
+            return response([
+                'status' => '404'
+            ]);
+        }
         return response([
-            'status' => '🔫🥷 200-OK',
+            'status' => '200',
             'data' => $data
         ]);
     }
@@ -20,9 +26,9 @@ class SubCategoryController extends Controller
 
     public function show($id) {
         $data = SubCategory::find($id);
-        if($data == null){return response(['status'=>'success', 'data' => '404 Not Found :(']);}
+        if($data == null){return response(['status'=>'success', 'data' => '404']);}
         return response([
-            'status' => '200-OKS:)',
+            'status' => '200',
             'data' => $data,
         ]);
 
@@ -45,7 +51,7 @@ class SubCategoryController extends Controller
         ]);
 
          return response([
-            'status' => '200 oKi 🐭'
+            'status' => '200'
         ]);
     }
 
@@ -56,25 +62,54 @@ class SubCategoryController extends Controller
             'sub_category_name_en' => 'required',
             'sub_category_name_tr' => 'required',
         ]);
-        SubCategory::findOrFail($id)->update([
+        if($data = SubCategory::find($id))
+        {
+        $data->update([
         'category_id' => $request->category_id,
         'sub_category_name_en' => $request->sub_category_name_en,
         'sub_category_name_tr' => $request->sub_category_name_tr,
         'sub_category_slug_en' => strtolower(str_replace(' ','-',$request->sub_category_name_en)),
         'sub_category_slug_tr' => strtolower(str_replace(' ','-',$request->sub_category_name_tr)),
         ]);
-
-        return response([
-            'status' => '204 No Content 🐱'
-        ]);
+         return response([
+            'status' => '200'
+        ]);        
+        }
+        else
+        {
+            return response([
+                'status' => '404'
+            ]);
+        }
+       
 
     }
 
     public function search($id) {
-        $data = Product::where('sub_category_id', '=', $id)->get(); // gets all the products sub_category_id reqested id
+    $data = Product::where('sub_category_id', '=', $id)->get(); // gets all the products sub_category_id reqested id
+    if(!count($data)){return response(['status'=>'404']);}
+
     return response([
+        'status' => '200',
         'id' => $id,
-        'data' => $data,
+        'data' => $data
     ]);
     }
+
+    public function destroy($id)
+    {
+       if( SubCategory::destroy($id))
+        {
+            return response([
+                'status' => '200'
+            ]);
+        }
+        else{
+             return response([
+                 'status' => '404'
+             ]);
+         }
+      
+    }
 }
+
